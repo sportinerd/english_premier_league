@@ -1,0 +1,835 @@
+name,position,team,assists,clean_sheets,goals_scored
+Aaron Anselmino,DEF,Chelsea,0.0,0.0,0.0
+Aaron Cresswell,DEF,West Ham,0.0,3.0,0.0
+Aaron Hickey,DEF,Brentford,0.0,0.0,0.0
+Aaron Ramsdale,GK,Arsenal,0.0,0.0,0.0
+Aaron Ramsdale,GK,Southampton,0.0,3.0,0.0
+Aaron Wan-Bissaka,DEF,West Ham,6.0,6.0,2.0
+Abdoulaye Doucouré,MID,Everton,2.0,11.0,3.0
+Abdukodir Khusanov,DEF,Man City,0.0,2.0,0.0
+Abdul Fatawu,MID,Leicester,2.0,0.0,0.0
+Adam Armstrong,FWD,Southampton,3.0,2.0,2.0
+Adam Lallana,MID,Southampton,2.0,0.0,0.0
+Adam Smith,DEF,Bournemouth,0.0,6.0,0.0
+Adam Webster,DEF,Brighton,1.0,4.0,0.0
+Adam Wharton,MID,Crystal Palace,2.0,4.0,0.0
+Adama Traoré,MID,Fulham,8.0,3.0,2.0
+Adrian Mazilu,MID,Brighton,0.0,0.0,0.0
+Albert Grønbæk,MID,Southampton,0.0,0.0,0.0
+Alejandro Garnacho,MID,Man Utd,4.0,5.0,6.0
+Alejo Véliz,FWD,Spurs,0.0,0.0,0.0
+Alex Iwobi,MID,Fulham,6.0,6.0,9.0
+Alex McCarthy,GK,Southampton,0.0,0.0,0.0
+Alex Mighten,MID,Nott'm Forest,0.0,0.0,0.0
+Alex Murphy,DEF,Newcastle,0.0,0.0,0.0
+Alex Palmer,GK,Ipswich,0.0,0.0,0.0
+Alex Paulsen,GK,Bournemouth,0.0,0.0,0.0
+Alex Scott,MID,Bournemouth,0.0,3.0,0.0
+Alexander Isak,FWD,Newcastle,6.0,12.0,23.0
+Alexis Mac Allister,MID,Liverpool,6.0,14.0,5.0
+Alfie Devine,MID,Spurs,0.0,0.0,0.0
+Alfie Dorrington,DEF,Spurs,0.0,0.0,0.0
+Alfie Gilchrist,DEF,Chelsea,0.0,0.0,0.0
+Alfie Pond,DEF,Wolves,0.0,0.0,0.0
+Alfie Whiteman,GK,Spurs,0.0,0.0,0.0
+Ali Al-Hamadi,FWD,Ipswich,0.0,0.0,0.0
+Alisson Ramses Becker,GK,Liverpool,0.0,10.0,0.0
+Alphonse Areola,GK,West Ham,0.0,4.0,0.0
+Altay Bayindir,GK,Man Utd,0.0,1.0,0.0
+Amad Diallo,MID,Man Utd,8.0,7.0,8.0
+Amadou Onana,MID,Aston Villa,0.0,6.0,3.0
+Amara Nallo,DEF,Liverpool,0.0,0.0,0.0
+Amario Cozier-Duberry,MID,Brighton,0.0,0.0,0.0
+Andoni Iraola,AM,Bournemouth,0.0,0.0,0.0
+Andreas Hoelgebaum Pereira,MID,Fulham,6.0,5.0,2.0
+Andrew Moran,MID,Brighton,0.0,0.0,0.0
+Andrew Omobamidele,DEF,Nott'm Forest,0.0,0.0,0.0
+Andrew Robertson,DEF,Liverpool,1.0,10.0,0.0
+Andrey Nascimento dos Santos,MID,Chelsea,0.0,0.0,0.0
+André Onana,GK,Man Utd,0.0,9.0,0.0
+André Trindade da Costa Neto,MID,Wolves,0.0,7.0,0.0
+Andrés García,DEF,Aston Villa,0.0,0.0,0.0
+Andy Irving,MID,West Ham,0.0,0.0,0.0
+Ange Postecoglou,AM,Spurs,0.0,0.0,0.0
+Anthony Elanga,MID,Nott'm Forest,11.0,12.0,6.0
+Anthony Gordon,MID,Newcastle,6.0,10.0,6.0
+Antoine Semenyo,MID,Bournemouth,7.0,11.0,11.0
+Antonee Robinson,DEF,Fulham,10.0,5.0,0.0
+Antony Matheus dos Santos,MID,Man Utd,0.0,0.0,0.0
+Antonín Kinsky,GK,Spurs,0.0,1.0,0.0
+Archie Gray,MID,Spurs,0.0,2.0,0.0
+Archie Harris,DEF,Bournemouth,0.0,0.0,0.0
+Arijanet Muric,GK,Ipswich,0.0,1.0,0.0
+Armando Broja,FWD,Chelsea,0.0,0.0,0.0
+Armando Broja,FWD,Everton,0.0,2.0,0.0
+Armel Bella-Kotchap,DEF,Southampton,0.0,0.0,0.0
+Arne Slot,AM,Liverpool,0.0,0.0,0.0
+Asher Agbinone,MID,Crystal Palace,0.0,0.0,0.0
+Ashley Phillips,DEF,Spurs,0.0,0.0,0.0
+Ashley Young,DEF,Everton,4.0,9.0,1.0
+Asmir Begovic,GK,Everton,0.0,0.0,0.0
+Axel Disasi,DEF,Aston Villa,0.0,1.0,0.0
+Axel Disasi,DEF,Chelsea,0.0,2.0,1.0
+Axel Tuanzebe,DEF,Ipswich,1.0,1.0,0.0
+Ayden Heaven,DEF,Arsenal,0.0,0.0,0.0
+Ayden Heaven,DEF,Man Utd,0.0,1.0,0.0
+Bart Verbruggen,GK,Brighton,1.0,7.0,0.0
+Bastien Meupiyou,DEF,Wolves,0.0,0.0,0.0
+Ben Brereton Díaz,MID,Southampton,0.0,0.0,0.0
+Ben Broggio,MID,Aston Villa,0.0,0.0,0.0
+Ben Chilwell,DEF,Chelsea,0.0,0.0,0.0
+Ben Chilwell,DEF,Crystal Palace,0.0,0.0,1.0
+Ben Davies,DEF,Spurs,0.0,3.0,0.0
+Ben Doak,MID,Liverpool,0.0,0.0,0.0
+Ben Godfrey,DEF,Ipswich,0.0,0.0,0.0
+Ben Johnson,DEF,Ipswich,2.0,0.0,1.0
+Ben Mee,DEF,Brentford,0.0,1.0,0.0
+Ben Nelson,DEF,Leicester,0.0,0.0,0.0
+Ben Winterburn,MID,Bournemouth,0.0,0.0,0.0
+Benicio Baker-Boaitey,MID,Brighton,0.0,0.0,0.0
+Benjamin Arthur,DEF,Brentford,0.0,0.0,0.0
+Benjamin Fredrick,DEF,Brentford,0.0,0.0,0.0
+Benjamin White,DEF,Arsenal,2.0,5.0,0.0
+Benoît Badiashile,DEF,Chelsea,0.0,0.0,0.0
+Bernardo Veiga de Carvalho e Silva,MID,Man City,4.0,10.0,4.0
+Bernd Leno,GK,Fulham,2.0,5.0,0.0
+Bilal El Khannouss,MID,Leicester,4.0,3.0,2.0
+Billy Gilmour,MID,Brighton,0.0,0.0,0.0
+Bobby Clark,MID,Liverpool,0.0,0.0,0.0
+Bobby De Cordova-Reid,MID,Leicester,4.0,1.0,1.0
+Boubacar Kamara,MID,Aston Villa,0.0,6.0,1.0
+Boubacar Traoré,MID,Wolves,0.0,0.0,0.0
+Boubakary Soumaré,MID,Leicester,0.0,1.0,0.0
+Brajan Gruda,MID,Brighton,4.0,1.0,1.0
+Brandon Austin,GK,Spurs,0.0,0.0,0.0
+Brayden Clarke,DEF,Arsenal,0.0,0.0,0.0
+Brennan Johnson,MID,Spurs,6.0,2.0,11.0
+Bruno Borges Fernandes,MID,Man Utd,12.0,10.0,8.0
+Bruno Guimarães Rodriguez Moura,MID,Newcastle,6.0,13.0,5.0
+Bryan Gil Salvatierra,MID,Spurs,0.0,0.0,0.0
+Bryan Mbeumo,MID,Brentford,9.0,9.0,20.0
+Bukayo Saka,MID,Arsenal,11.0,7.0,6.0
+Caleb Kporha,DEF,Crystal Palace,0.0,0.0,0.0
+Caleb Okoli,DEF,Leicester,0.0,1.0,1.0
+Caleb Wiley,DEF,Chelsea,0.0,0.0,0.0
+Callan McKenna,GK,Bournemouth,0.0,0.0,0.0
+Callum Bates,MID,Everton,0.0,0.0,0.0
+Callum Hudson-Odoi,MID,Nott'm Forest,3.0,11.0,5.0
+Callum Olusesi,MID,Spurs,0.0,0.0,0.0
+Callum Wilson,FWD,Newcastle,0.0,0.0,0.0
+Calvin Bassey,DEF,Fulham,0.0,5.0,1.0
+Cameron Archer,FWD,Southampton,0.0,2.0,2.0
+Cameron Burgess,DEF,Ipswich,2.0,0.0,0.0
+Cameron Humphreys,MID,Ipswich,0.0,0.0,0.0
+Cameron Peupion,MID,Brighton,0.0,0.0,0.0
+Caoimhin Kelleher,GK,Liverpool,0.0,4.0,0.0
+Carl Rushworth,GK,Brighton,0.0,0.0,0.0
+Carlos Alcaraz Durán,MID,Everton,3.0,1.0,2.0
+Carlos Alcaraz Durán,MID,Southampton,0.0,0.0,0.0
+Carlos Baleba,MID,Brighton,1.0,8.0,3.0
+Carlos Henrique Casimiro,MID,Man Utd,0.0,6.0,1.0
+Carlos Miguel dos Santos Pereira,GK,Nott'm Forest,0.0,0.0,0.0
+Carlos Roberto Forbs Borges,MID,Wolves,0.0,0.0,0.0
+Carlos Soler,MID,West Ham,1.0,2.0,1.0
+Carlos Vinícius Alves Morais,FWD,Fulham,0.0,0.0,0.0
+Carney Chukwuemeka,MID,Chelsea,0.0,0.0,0.0
+Cesare Casadei,MID,Chelsea,0.0,0.0,0.0
+Chadi Riad Dnanou,DEF,Crystal Palace,0.0,0.0,0.0
+Charlie Tasker,DEF,Brighton,0.0,0.0,0.0
+Charlie Taylor,DEF,Southampton,0.0,0.0,0.0
+Cheick Doucouré,MID,Crystal Palace,1.0,1.0,0.0
+Chido Obi-Martin,FWD,Man Utd,0.0,0.0,0.0
+Chiedozie Ogbene,MID,Ipswich,0.0,0.0,0.0
+Chris Mepham,DEF,Bournemouth,0.0,0.0,0.0
+Chris Richards,DEF,Crystal Palace,1.0,7.0,1.0
+Chris Wood,FWD,Nott'm Forest,3.0,15.0,20.0
+Christian Eriksen,MID,Man Utd,2.0,4.0,1.0
+Christian Nørgaard,MID,Brentford,5.0,6.0,5.0
+Christian Walton,GK,Ipswich,0.0,1.0,0.0
+Christopher Nkunku,MID,Chelsea,2.0,2.0,3.0
+Cieran Slicker,GK,Ipswich,0.0,0.0,0.0
+Claudio Echeverri,MID,Man City,0.0,0.0,0.0
+Coby Ebere,MID,Everton,0.0,0.0,0.0
+Cody Gakpo,FWD,Liverpool,5.0,5.0,10.0
+Cole Palmer,MID,Chelsea,10.0,10.0,15.0
+Conor Bradley,DEF,Liverpool,2.0,3.0,0.0
+Conor Chaplin,MID,Ipswich,2.0,1.0,1.0
+Conor Coady,DEF,Leicester,0.0,2.0,1.0
+Conor Gallagher,MID,Chelsea,0.0,0.0,0.0
+Conor Townsend,DEF,Ipswich,1.0,0.0,0.0
+Corrie Ndaba,DEF,Ipswich,0.0,0.0,0.0
+Craig Dawson,DEF,Wolves,1.0,1.0,0.0
+Cristian Romero,DEF,Spurs,1.0,3.0,1.0
+Crysencio Summerville,MID,West Ham,1.0,2.0,1.0
+Curtis Jones,MID,Liverpool,5.0,6.0,3.0
+Daichi Kamada,MID,Crystal Palace,0.0,3.0,0.0
+Damola Ajayi,MID,Spurs,0.0,0.0,0.0
+Dan Burn,DEF,Newcastle,1.0,13.0,1.0
+Dane Scarlett,FWD,Spurs,1.0,0.0,0.0
+Dango Ouattara,MID,Bournemouth,4.0,7.0,7.0
+Daniel Adu-Adjei,FWD,Bournemouth,0.0,0.0,0.0
+Daniel Bentley,GK,Wolves,0.0,1.0,0.0
+Daniel Castelo Podence,MID,Wolves,0.0,0.0,0.0
+Daniel Iversen,GK,Leicester,0.0,0.0,0.0
+Daniel Jebbison,FWD,Bournemouth,0.0,0.0,1.0
+Daniel Muñoz,DEF,Crystal Palace,6.0,11.0,4.0
+Danilo dos Santos de Oliveira,MID,Nott'm Forest,0.0,1.0,0.0
+Danny Ings,FWD,West Ham,3.0,0.0,1.0
+Danny Ward,GK,Leicester,0.0,0.0,0.0
+Danny Welbeck,FWD,Brighton,5.0,7.0,10.0
+Dante Cassanova,DEF,Spurs,0.0,0.0,0.0
+Dara O'Shea,DEF,Ipswich,2.0,2.0,0.0
+Darwin Núñez Ribeiro,FWD,Liverpool,3.0,2.0,5.0
+David Brooks,MID,Bournemouth,1.0,3.0,2.0
+David Datro Fofana,FWD,Chelsea,0.0,0.0,0.0
+David Moyes,AM,Everton,0.0,0.0,0.0
+David Ozoh,MID,Crystal Palace,0.0,0.0,0.0
+David Raya Martin,GK,Arsenal,0.0,13.0,0.0
+Dean Henderson,GK,Crystal Palace,0.0,11.0,0.0
+Dean Huijsen,DEF,Bournemouth,2.0,7.0,3.0
+Declan Rice,MID,Arsenal,7.0,11.0,4.0
+Deivid Washington de Souza Eugênio,FWD,Chelsea,0.0,0.0,0.0
+Dejan Kulusevski,MID,Spurs,4.0,6.0,7.0
+Deniz Undav,FWD,Brighton,0.0,0.0,0.0
+Dermot Mee,GK,Man Utd,0.0,0.0,0.0
+Destiny Udogie,DEF,Spurs,1.0,2.0,0.0
+Diego Carlos Santos Silva,DEF,Aston Villa,0.0,2.0,0.0
+Diego Gómez,MID,Brighton,1.0,0.0,1.0
+Diogo Dalot Teixeira,DEF,Man Utd,4.0,8.0,0.0
+Diogo Teixeira da Silva,MID,Liverpool,4.0,7.0,6.0
+Divin Mubama,FWD,Man City,0.0,0.0,0.0
+Djed Spence,DEF,Spurs,2.0,3.0,1.0
+Dominic Calvert-Lewin,FWD,Everton,2.0,8.0,3.0
+Dominic Sadi,MID,Bournemouth,0.0,0.0,0.0
+Dominic Solanke-Mitchell,FWD,Spurs,5.0,4.0,9.0
+Dominik Szoboszlai,MID,Liverpool,10.0,12.0,6.0
+Donyell Malen,MID,Aston Villa,0.0,0.0,3.0
+Dwight McNeil,MID,Everton,8.0,5.0,4.0
+Eberechi Eze,MID,Crystal Palace,8.0,10.0,8.0
+Eddie Howe,AM,Newcastle,0.0,0.0,0.0
+Eddie Nketiah,FWD,Arsenal,0.0,0.0,0.0
+Eddie Nketiah,FWD,Crystal Palace,2.0,2.0,3.0
+Ederson Santana de Moraes,GK,Man City,4.0,10.0,0.0
+Edson Álvarez Velázquez,MID,West Ham,1.0,3.0,0.0
+Eiran Cashin,DEF,Brighton,0.0,0.0,0.0
+Elkan Baggott,DEF,Ipswich,0.0,0.0,0.0
+Elliot Anderson,MID,Nott'm Forest,6.0,13.0,2.0
+Elyh Harrison,GK,Man Utd,0.0,0.0,0.0
+Emerson Leite de Souza Junior,DEF,Spurs,0.0,0.0,0.0
+Emerson Palmieri dos Santos,DEF,West Ham,1.0,5.0,2.0
+Emil Krafth,DEF,Newcastle,0.0,1.0,0.0
+Emile Smith Rowe,MID,Fulham,3.0,7.0,6.0
+Emiliano Buendía Stati,MID,Aston Villa,0.0,0.0,0.0
+Emiliano Martínez Romero,GK,Aston Villa,0.0,8.0,0.0
+Emmanuel Agbadou,DEF,Wolves,0.0,4.0,1.0
+Emmanuel Dennis,FWD,Nott'm Forest,0.0,0.0,0.0
+Endo Wataru,MID,Liverpool,0.0,0.0,0.0
+Enes Ünal,FWD,Bournemouth,1.0,2.0,2.0
+Enso González,MID,Wolves,0.0,0.0,0.0
+Enzo Barrenechea,MID,Aston Villa,0.0,0.0,0.0
+Enzo Fernández,MID,Chelsea,8.0,10.0,6.0
+Enzo Maresca,AM,Chelsea,0.0,0.0,0.0
+Eric da Silva Moreira,MID,Nott'm Forest,0.0,0.0,0.0
+Erling Haaland,FWD,Man City,3.0,10.0,22.0
+Ethan Brierley,MID,Brentford,0.0,0.0,0.0
+Ethan Nwaneri,MID,Arsenal,2.0,4.0,4.0
+Ethan Pinnock,DEF,Brentford,0.0,2.0,2.0
+Ethan Wheatley,FWD,Man Utd,0.0,0.0,0.0
+Evan Ferguson,FWD,Brighton,0.0,1.0,1.0
+Evan Ferguson,FWD,West Ham,0.0,0.0,0.0
+Ezra Mayers,DEF,West Ham,0.0,0.0,0.0
+Ezri Konsa Ngoyo,DEF,Aston Villa,0.0,8.0,2.0
+Fabian Hürzeler,AM,Brighton,0.0,0.0,0.0
+Fabian Schär,DEF,Newcastle,2.0,11.0,4.0
+Facundo Buonanotte,MID,Leicester,2.0,2.0,5.0
+Facundo Pellistri Rebollo,MID,Man Utd,0.0,0.0,0.0
+Federico Chiesa,MID,Liverpool,0.0,0.0,0.0
+Felipe Rodrigues da Silva,DEF,Nott'm Forest,0.0,3.0,0.0
+Ferdi Kadioglu,DEF,Brighton,0.0,2.0,1.0
+Filip Jørgensen,GK,Chelsea,0.0,1.0,0.0
+Filip Marschall,GK,Aston Villa,0.0,0.0,0.0
+Flynn Downes,MID,Southampton,0.0,4.0,1.0
+Francisco Evanilson de Lima Barbosa,FWD,Bournemouth,5.0,11.0,10.0
+Francisco Jorge Tomás Oliveira,MID,Wolves,0.0,0.0,0.0
+Franco Umeh-Chibueze,MID,Crystal Palace,0.0,0.0,0.0
+Frank Onyeka,MID,Brentford,0.0,0.0,0.0
+Fraser Forster,GK,Spurs,0.0,1.0,0.0
+Freddie Ladapo,FWD,Ipswich,0.0,0.0,0.0
+Freddie Simmonds,DEF,Brighton,0.0,0.0,0.0
+Fábio Ferreira Vieira,MID,Arsenal,0.0,0.0,0.0
+Fábio Freitas Gouveia Carvalho,MID,Brentford,1.0,0.0,2.0
+Fábio Silva,FWD,Wolves,0.0,0.0,0.0
+Gabriel Fernando de Jesus,FWD,Arsenal,2.0,2.0,3.0
+Gabriel Martinelli Silva,MID,Arsenal,4.0,10.0,8.0
+Gabriel dos Santos Magalhães,DEF,Arsenal,2.0,10.0,3.0
+Garang Kuol,MID,Newcastle,0.0,0.0,0.0
+Gavin Bazunu,GK,Southampton,0.0,0.0,0.0
+Genesis Antwi,DEF,Chelsea,0.0,0.0,0.0
+George Earthy,MID,West Ham,0.0,0.0,0.0
+George Edmundson,DEF,Ipswich,0.0,0.0,0.0
+George Hirst,FWD,Ipswich,1.0,0.0,3.0
+Georginio Rutter,MID,Brighton,6.0,6.0,5.0
+Giovani Lo Celso,MID,Spurs,0.0,0.0,0.0
+Godwill Kukonki,DEF,Man Utd,0.0,0.0,0.0
+Gonçalo Manuel Ganchinho Guedes,MID,Wolves,4.0,3.0,2.0
+Graham Potter,AM,West Ham,0.0,0.0,0.0
+Guglielmo Vicario,GK,Spurs,0.0,4.0,0.0
+Guido Rodríguez,MID,West Ham,1.0,4.0,0.0
+Gustavo Nunes Fernandes Gomes,MID,Brentford,0.0,0.0,0.0
+Hamed Traorè,MID,Bournemouth,0.0,0.0,0.0
+Hamza Choudhury,MID,Leicester,0.0,0.0,0.0
+Hannibal Mejbri,MID,Man Utd,0.0,0.0,0.0
+Harrison Armstrong,MID,Everton,0.0,0.0,0.0
+Harrison Reed,MID,Fulham,0.0,0.0,0.0
+Harry Amass,DEF,Man Utd,0.0,0.0,0.0
+Harry Clarke,DEF,Ipswich,0.0,0.0,0.0
+Harry Howell,MID,Brighton,0.0,0.0,0.0
+Harry Maguire,DEF,Man Utd,0.0,3.0,1.0
+Harry Souttar,DEF,Leicester,0.0,0.0,0.0
+Harry Toffolo,DEF,Nott'm Forest,0.0,0.0,0.0
+Harry Wilson,MID,Fulham,2.0,2.0,6.0
+Harry Winks,MID,Leicester,2.0,0.0,0.0
+Harvey Barnes,MID,Newcastle,5.0,6.0,9.0
+Harvey Davies,GK,Liverpool,0.0,0.0,0.0
+Harvey Elliott,MID,Liverpool,2.0,0.0,1.0
+Henry Cartwright,MID,Leicester,0.0,0.0,0.0
+Hubert Graczyk,GK,Man Utd,0.0,0.0,0.0
+Hugo Bueno López,DEF,Wolves,0.0,0.0,0.0
+Hwang Hee-chan,MID,Wolves,1.0,0.0,2.0
+Hwang Ui-jo,FWD,Nott'm Forest,0.0,0.0,0.0
+Hákon Valdimarsson,GK,Brentford,0.0,0.0,0.0
+Ian Maatsen,DEF,Aston Villa,2.0,3.0,1.0
+Ibrahim Osman,MID,Brighton,0.0,0.0,0.0
+Ibrahim Sangaré,MID,Nott'm Forest,1.0,2.0,0.0
+Ibrahima Konaté,DEF,Liverpool,2.0,11.0,1.0
+Idrissa Gueye,MID,Everton,3.0,12.0,0.0
+Igor Julio dos Santos de Paulo,DEF,Brighton,0.0,1.0,0.0
+Igor Thiago Nascimento Rodrigues,FWD,Brentford,0.0,0.0,0.0
+Iliman Ndiaye,FWD,Everton,0.0,15.0,9.0
+Ilkay Gündogan,MID,Man City,7.0,10.0,1.0
+Illia Zabarnyi,DEF,Bournemouth,1.0,8.0,0.0
+Imari Samuels,DEF,Brighton,0.0,0.0,0.0
+Isaac Hayden,MID,Newcastle,0.0,0.0,0.0
+Isaac Heath,MID,Everton,0.0,0.0,0.0
+Ishé Samuels-Smith,DEF,Chelsea,0.0,0.0,0.0
+Ismaïla Sarr,MID,Crystal Palace,7.0,10.0,8.0
+Ismeal Kabia,MID,Arsenal,0.0,0.0,0.0
+Issa Diop,DEF,Fulham,0.0,1.0,0.0
+Issa Kaboré,DEF,Man City,0.0,0.0,0.0
+Ivan Juric,AM,Southampton,0.0,0.0,0.0
+Ivan Toney,FWD,Brentford,0.0,0.0,0.0
+Iwan Morgan,FWD,Brentford,0.0,0.0,0.0
+Jack Clarke,MID,Ipswich,4.0,1.0,0.0
+Jack Fletcher,MID,Man Utd,0.0,0.0,0.0
+Jack Grealish,MID,Man City,1.0,2.0,1.0
+Jack Harrison,MID,Everton,3.0,7.0,1.0
+Jack Henry-Francis,MID,Arsenal,0.0,0.0,0.0
+Jack Hinshelwood,MID,Brighton,3.0,6.0,5.0
+Jack Moorhouse,MID,Man Utd,0.0,0.0,0.0
+Jack Porter,GK,Arsenal,0.0,0.0,0.0
+Jack Stephens,DEF,Southampton,0.0,2.0,1.0
+Jack Taylor,MID,Ipswich,0.0,0.0,1.0
+Jacob Greaves,DEF,Ipswich,0.0,2.0,1.0
+Jacob Murphy,MID,Newcastle,13.0,11.0,8.0
+Jacob Ramsey,MID,Aston Villa,4.0,5.0,1.0
+Jacob Slater,DEF,Brighton,0.0,0.0,0.0
+Jacob Wright,MID,Man City,0.0,0.0,0.0
+Jaden Philogene,MID,Aston Villa,0.0,1.0,0.0
+Jaden Philogene,MID,Ipswich,0.0,1.0,2.0
+Jadon Sancho,MID,Chelsea,5.0,7.0,3.0
+Jadon Sancho,MID,Man Utd,0.0,0.0,0.0
+Jahmai Simpson-Pusey,DEF,Man City,0.0,0.0,0.0
+Jaidon Anthony,MID,Bournemouth,0.0,0.0,0.0
+Jake Evans,MID,Leicester,0.0,0.0,0.0
+Jake O'Brien,DEF,Everton,0.0,5.0,2.0
+Jakub Kiwior,DEF,Arsenal,0.0,3.0,1.0
+Jakub Moder,MID,Brighton,0.0,0.0,0.0
+Jakub Stolarczyk,GK,Leicester,0.0,2.0,0.0
+Jamaal Lascelles,DEF,Newcastle,0.0,0.0,0.0
+Jamal Lewis,DEF,Newcastle,0.0,0.0,0.0
+Jamaldeen Jimoh,MID,Aston Villa,0.0,0.0,0.0
+James Bree,DEF,Southampton,1.0,1.0,0.0
+James Garner,MID,Everton,1.0,5.0,0.0
+James Hill,DEF,Bournemouth,1.0,1.0,0.0
+James Justin,DEF,Leicester,2.0,3.0,2.0
+James Maddison,MID,Spurs,8.0,6.0,9.0
+James McAtee,MID,Man City,0.0,0.0,3.0
+James McConnell,MID,Liverpool,0.0,0.0,0.0
+James Milner,MID,Brighton,0.0,1.0,0.0
+James Tarkowski,DEF,Everton,1.0,10.0,1.0
+James Ward-Prowse,MID,Nott'm Forest,1.0,1.0,0.0
+James Ward-Prowse,MID,West Ham,1.0,4.0,1.0
+Jamie Vardy,FWD,Leicester,5.0,4.0,9.0
+Jan Bednarek,DEF,Southampton,0.0,3.0,2.0
+Jan Paul van Hecke,DEF,Brighton,1.0,7.0,1.0
+Jannik Vestergaard,DEF,Leicester,0.0,0.0,0.0
+Jarell Quansah,DEF,Liverpool,0.0,0.0,0.0
+Jarrad Branthwaite,DEF,Everton,1.0,9.0,0.0
+Jarrod Bowen,MID,West Ham,11.0,8.0,13.0
+Jason Steele,GK,Brighton,0.0,1.0,0.0
+Jay Robinson,FWD,Southampton,0.0,0.0,0.0
+Jay Stansfield,FWD,Fulham,0.0,0.0,0.0
+Jayce Fitzgerald,MID,Man Utd,0.0,0.0,0.0
+Jayden Danns,FWD,Liverpool,0.0,0.0,0.0
+Jayden Meghoma,DEF,Brentford,0.0,0.0,0.0
+Jayden Moore,DEF,Southampton,0.0,0.0,0.0
+Jean-Clair Todibo,DEF,West Ham,0.0,5.0,0.0
+Jean-Philippe Mateta,FWD,Crystal Palace,2.0,9.0,14.0
+Jean-Ricner Bellegarde,MID,Wolves,7.0,6.0,2.0
+Jefferson Lerma Solís,MID,Crystal Palace,1.0,6.0,0.0
+Jeffrey Schlupp,MID,Crystal Palace,0.0,0.0,0.0
+Jens Cajuste,MID,Ipswich,1.0,1.0,1.0
+Jenson Metcalfe,MID,Everton,0.0,0.0,0.0
+Jeremy Monga,MID,Leicester,0.0,0.0,0.0
+Jeremy Sarmiento Morante,MID,Brighton,0.0,0.0,0.0
+Jesper Lindstrøm,MID,Everton,1.0,6.0,0.0
+Jesurun Rak-Sakyi,MID,Crystal Palace,0.0,0.0,0.0
+Jhon Durán,FWD,Aston Villa,0.0,2.0,7.0
+Jimi Gower,MID,Arsenal,0.0,0.0,0.0
+Joachim Andersen,DEF,Crystal Palace,0.0,0.0,0.0
+Joachim Andersen,DEF,Fulham,0.0,4.0,0.0
+Joachim Kayi-Sanda,DEF,Southampton,0.0,0.0,0.0
+Joe Aribo,MID,Southampton,0.0,1.0,3.0
+Joe Gauci,GK,Aston Villa,0.0,0.0,0.0
+Joe Gomez,DEF,Liverpool,0.0,1.0,0.0
+Joe Hodge,MID,Wolves,0.0,0.0,0.0
+Joe Knight,MID,Brighton,0.0,0.0,0.0
+Joe Lumley,GK,Southampton,0.0,0.0,0.0
+Joe White,MID,Newcastle,0.0,0.0,0.0
+Joe Willock,MID,Newcastle,2.0,4.0,0.0
+Joe Worrall,DEF,Nott'm Forest,0.0,0.0,0.0
+Joel Ward,DEF,Crystal Palace,0.0,0.0,0.0
+Joelinton Cássio Apolinário de Lira,MID,Newcastle,4.0,10.0,4.0
+John McGinn,MID,Aston Villa,4.0,8.0,1.0
+John Ruddy,GK,Newcastle,0.0,0.0,0.0
+John Stones,DEF,Man City,0.0,1.0,2.0
+Jonathan Panzo,DEF,Nott'm Forest,0.0,0.0,0.0
+Jonny Evans,DEF,Man Utd,0.0,1.0,0.0
+Jordan Ayew,MID,Crystal Palace,0.0,0.0,0.0
+Jordan Ayew,MID,Leicester,0.0,4.0,5.0
+Jordan Pickford,GK,Everton,1.0,12.0,0.0
+Jorge Cuenca Barreno,DEF,Fulham,0.0,0.0,0.0
+Jorge Luiz Frello Filho,MID,Arsenal,0.0,2.0,0.0
+Joseph O'Brien-Whitmarsh,MID,Southampton,0.0,0.0,0.0
+Josh Acheampong,DEF,Chelsea,0.0,0.0,0.0
+Josh Bowler,MID,Nott'm Forest,0.0,0.0,0.0
+Josh Dasilva,MID,Brentford,0.0,0.0,0.0
+Josh King,MID,Fulham,0.0,1.0,0.0
+Josh Nichols,DEF,Arsenal,0.0,0.0,0.0
+Josh Wilson-Esbrand,DEF,Man City,0.0,0.0,0.0
+Joshua Zirkzee,FWD,Man Utd,2.0,3.0,3.0
+José Malheiro de Sá,GK,Wolves,0.0,7.0,0.0
+João Cavaco Cancelo,DEF,Man City,0.0,0.0,0.0
+João Félix Sequeira,MID,Chelsea,2.0,1.0,1.0
+João Neves Virgínia,GK,Everton,0.0,0.0,0.0
+João Pedro Ferreira Silva,MID,Nott'm Forest,2.0,1.0,3.0
+João Pedro Junqueira de Jesus,FWD,Brighton,6.0,6.0,10.0
+João Victor Gomes da Silva,MID,Wolves,1.0,6.0,3.0
+Joël Veltman,DEF,Brighton,0.0,6.0,0.0
+Joško Gvardiol,DEF,Man City,0.0,13.0,5.0
+Juan Larios López,DEF,Southampton,0.0,0.0,0.0
+Julian Eyestone,GK,Brentford,0.0,0.0,0.0
+Julio Enciso,MID,Brighton,0.0,1.0,0.0
+Julio Enciso,MID,Ipswich,3.0,1.0,2.0
+Julio Soler,DEF,Bournemouth,0.0,0.0,0.0
+Julián Araujo Zúñiga,DEF,Bournemouth,0.0,0.0,0.0
+Julián Álvarez,FWD,Man City,0.0,0.0,0.0
+Jurriën Timber,DEF,Arsenal,3.0,11.0,1.0
+Justin Devenny,MID,Crystal Palace,1.0,0.0,1.0
+Justin Kluivert,MID,Bournemouth,6.0,13.0,12.0
+Jérémy Doku,MID,Man City,6.0,8.0,3.0
+Jørgen Strand Larsen,FWD,Wolves,4.0,7.0,14.0
+Kacper Kozłowski,MID,Brighton,0.0,0.0,0.0
+Kadan Young,MID,Aston Villa,0.0,0.0,0.0
+Kaden Rodney,MID,Crystal Palace,0.0,0.0,0.0
+Kaelan Casey,DEF,West Ham,0.0,0.0,0.0
+Kai Havertz,FWD,Arsenal,3.0,7.0,9.0
+Kaine Kesler-Hayden,DEF,Aston Villa,0.0,0.0,0.0
+Kalvin Phillips,MID,Ipswich,0.0,1.0,0.0
+Kamaldeen Sulemana,MID,Southampton,2.0,3.0,1.0
+Karl Hein,GK,Arsenal,0.0,0.0,0.0
+Kasey McAteer,MID,Leicester,1.0,3.0,1.0
+Keane Lewis-Potter,MID,Brentford,5.0,8.0,1.0
+Kenny Tete,DEF,Fulham,2.0,3.0,0.0
+Kepa Arrizabalaga,GK,Bournemouth,0.0,8.0,0.0
+Kepa Arrizabalaga,GK,Chelsea,0.0,0.0,0.0
+Kevin Danso,DEF,Spurs,0.0,1.0,0.0
+Kevin De Bruyne,MID,Man City,9.0,10.0,4.0
+Kevin Mbabu,DEF,Fulham,0.0,0.0,0.0
+Kevin Schade,MID,Brentford,4.0,10.0,11.0
+Ki-Jana Hoever,DEF,Wolves,0.0,0.0,0.0
+Kieran McKenna,AM,Ipswich,0.0,0.0,0.0
+Kieran Tierney,DEF,Arsenal,0.0,1.0,1.0
+Kieran Trippier,DEF,Newcastle,3.0,6.0,0.0
+Kiernan Dewsbury-Hall,MID,Chelsea,1.0,0.0,0.0
+Killian Cahill,GK,Brighton,0.0,0.0,0.0
+Kim Ji-soo,DEF,Brentford,0.0,0.0,0.0
+Kobbie Mainoo,MID,Man Utd,0.0,5.0,0.0
+Konstantinos Mavropanos,DEF,West Ham,0.0,2.0,0.0
+Konstantinos Tsimikas,DEF,Liverpool,1.0,4.0,0.0
+Kortney Hause,DEF,Aston Villa,0.0,0.0,0.0
+Kosta Nedeljković,DEF,Aston Villa,0.0,0.0,0.0
+Kristoffer Ajer,DEF,Brentford,0.0,3.0,0.0
+Kurt Zouma,DEF,West Ham,0.0,0.0,0.0
+Kyle Walker,DEF,Man City,0.0,0.0,0.0
+Kyle Walker-Peters,DEF,Southampton,3.0,2.0,0.0
+Lamare Bogarde,DEF,Aston Villa,0.0,0.0,0.0
+Leander Dendoncker,MID,Aston Villa,0.0,0.0,0.0
+Leandro Trossard,MID,Arsenal,8.0,11.0,8.0
+Leif Davis,DEF,Ipswich,2.0,2.0,1.0
+Leny Yoro,DEF,Man Utd,0.0,1.0,0.0
+Leon Bailey,MID,Aston Villa,2.0,2.0,1.0
+Leon Chiwome,FWD,Wolves,0.0,0.0,0.0
+Lesley Ugochukwu,MID,Chelsea,0.0,0.0,0.0
+Lesley Ugochukwu,MID,Southampton,1.0,1.0,1.0
+Levi Colwill,DEF,Chelsea,1.0,10.0,2.0
+Lewis Cook,MID,Bournemouth,4.0,5.0,1.0
+Lewis Dobbin,MID,Aston Villa,0.0,0.0,0.0
+Lewis Dunk,DEF,Brighton,1.0,4.0,0.0
+Lewis Hall,DEF,Newcastle,7.0,8.0,0.0
+Lewis Miley,MID,Newcastle,0.0,0.0,1.0
+Lewis O'Brien,MID,Nott'm Forest,0.0,0.0,0.0
+Lewis Orford,MID,West Ham,0.0,0.0,0.0
+Liam Delap,FWD,Ipswich,2.0,3.0,12.0
+Lino da Cruz Sousa,DEF,Aston Villa,0.0,0.0,0.0
+Lisandro Martínez,DEF,Man Utd,1.0,6.0,2.0
+Lloyd Kelly,DEF,Newcastle,1.0,0.0,0.0
+Luca Williams-Barnett,MID,Spurs,0.0,0.0,0.0
+Lucas Bergström,GK,Chelsea,0.0,0.0,0.0
+Lucas Bergvall,MID,Spurs,2.0,3.0,0.0
+Lucas Digne,DEF,Aston Villa,5.0,6.0,0.0
+Lucas Tolentino Coelho de Lima,MID,West Ham,1.0,4.0,4.0
+Luis Díaz,MID,Liverpool,7.0,15.0,13.0
+Luis Guilherme Lira dos Santos,MID,West Ham,0.0,0.0,0.0
+Luis Sinisterra,MID,Bournemouth,1.0,0.0,1.0
+Luke Cundle,MID,Wolves,0.0,0.0,0.0
+Luke Harris,MID,Fulham,0.0,0.0,0.0
+Luke Shaw,DEF,Man Utd,0.0,0.0,0.0
+Luke Thomas,DEF,Leicester,0.0,3.0,0.0
+Luke Woolfenden,DEF,Ipswich,0.0,1.0,0.0
+Mads Hermansen,GK,Leicester,0.0,1.0,0.0
+Mads Roerslev Rasmussen,DEF,Brentford,2.0,2.0,0.0
+Maeson King,DEF,Spurs,0.0,0.0,0.0
+Mahmoud Dahoud,MID,Brighton,0.0,0.0,0.0
+Malachi Hardy,DEF,Spurs,0.0,0.0,0.0
+Malang Sarr,DEF,Chelsea,0.0,0.0,0.0
+Malcolm Ebiowei,MID,Crystal Palace,0.0,0.0,0.0
+Maldini Kacurri,DEF,Arsenal,0.0,0.0,0.0
+Malo Gusto,DEF,Chelsea,1.0,4.0,0.0
+Manor Solomon,MID,Spurs,0.0,0.0,0.0
+Manuel Akanji,DEF,Man City,0.0,6.0,0.0
+Manuel Ugarte,MID,Man Utd,2.0,4.0,1.0
+Marc Cucurella Saseta,DEF,Chelsea,2.0,9.0,5.0
+Marc Guiu Paz,FWD,Chelsea,0.0,0.0,0.0
+Marc Guéhi,DEF,Crystal Palace,2.0,11.0,3.0
+Marco Alexandre Saraiva da Silva,AM,Fulham,0.0,0.0,0.0
+Marco Asensio,MID,Aston Villa,2.0,3.0,3.0
+Marcos Senesi,DEF,Bournemouth,0.0,2.0,0.0
+Marcus Bettinelli,GK,Chelsea,0.0,0.0,0.0
+Marcus Myers-Harness,MID,Ipswich,0.0,0.0,0.0
+Marcus Rashford,MID,Aston Villa,3.0,2.0,2.0
+Marcus Rashford,MID,Man Utd,1.0,5.0,4.0
+Marcus Tavernier,MID,Bournemouth,7.0,4.0,3.0
+Mario Lemina,MID,Wolves,3.0,1.0,1.0
+Mark Flekken,GK,Brentford,2.0,7.0,0.0
+Mark O’Mahony,FWD,Brighton,0.0,0.0,0.0
+Mark Travers,GK,Bournemouth,0.0,1.0,0.0
+Marshall Munetsi,MID,Wolves,2.0,5.0,2.0
+Martial Godo,MID,Fulham,0.0,0.0,0.0
+Martin Dúbravka,GK,Newcastle,0.0,5.0,0.0
+Martin Sherif,FWD,Everton,0.0,0.0,0.0
+Martin Ødegaard,MID,Arsenal,9.0,11.0,3.0
+Mason Holgate,DEF,Everton,0.0,0.0,0.0
+Mason Mount,MID,Man Utd,0.0,3.0,1.0
+Massimo Luongo,MID,Ipswich,0.0,0.0,0.0
+Matai Akinmboni,DEF,Bournemouth,0.0,0.0,0.0
+Mateo Kovačić,MID,Man City,3.0,10.0,6.0
+Mateus Gonçalo Espanha Fernandes,MID,Southampton,4.0,5.0,2.0
+Mateus Mané,FWD,Wolves,0.0,0.0,0.0
+Mateusz Lis,GK,Southampton,0.0,0.0,0.0
+Matheus França de Oliveira,MID,Crystal Palace,0.0,0.0,1.0
+Matheus Luiz Nunes,MID,Man City,7.0,9.0,1.0
+Matheus Santos Carneiro Da Cunha,FWD,Wolves,7.0,7.0,15.0
+Mathias Jensen,MID,Brentford,2.0,2.0,0.0
+Mathias Jorgensen,DEF,Brentford,0.0,0.0,0.0
+Mathis Amougou,MID,Chelsea,0.0,0.0,0.0
+Mathys Tel,MID,Spurs,2.0,2.0,2.0
+Mats Wieffer,MID,Brighton,5.0,2.0,1.0
+Matt Doherty,DEF,Wolves,1.0,6.0,2.0
+Matt O'Riley,MID,Brighton,3.0,2.0,2.0
+Matt Targett,DEF,Newcastle,0.0,0.0,0.0
+Matt Turner,GK,Crystal Palace,0.0,0.0,0.0
+Matt Turner,GK,Nott'm Forest,0.0,0.0,0.0
+Matthijs de Ligt,DEF,Man Utd,0.0,4.0,2.0
+Matty Cash,DEF,Aston Villa,1.0,7.0,1.0
+Matz Sels,GK,Nott'm Forest,1.0,13.0,0.0
+Max Aarons,DEF,Bournemouth,0.0,1.0,0.0
+Max Alleyne,DEF,Man City,0.0,0.0,0.0
+Max Kilman,DEF,West Ham,1.0,6.0,0.0
+Max Kinsey,DEF,Bournemouth,0.0,0.0,0.0
+Maxence Lacroix,DEF,Crystal Palace,2.0,11.0,1.0
+Maxwel Cornet,MID,Southampton,0.0,0.0,0.0
+Maxwel Cornet,MID,West Ham,0.0,0.0,0.0
+Michael Golding,MID,Leicester,0.0,0.0,0.0
+Michael Kayode,DEF,Brentford,1.0,2.0,0.0
+Michael Keane,DEF,Everton,0.0,3.0,3.0
+Michail Antonio,FWD,West Ham,4.0,4.0,1.0
+Micky van de Ven,DEF,Spurs,2.0,2.0,0.0
+Miguel Almirón Rejala,MID,Newcastle,0.0,0.0,0.0
+Mikel Arteta,AM,Arsenal,0.0,0.0,0.0
+Mikel Merino,MID,Arsenal,2.0,4.0,7.0
+Mikey Moore,MID,Spurs,2.0,0.0,0.0
+Mikkel Damsgaard,MID,Brentford,10.0,11.0,2.0
+Milos Kerkez,DEF,Bournemouth,6.0,9.0,2.0
+Min-Hyeok Yang,MID,Spurs,0.0,0.0,0.0
+Miodrag Pivaš,DEF,Newcastle,0.0,0.0,0.0
+Mitoma Kaoru,MID,Brighton,5.0,6.0,10.0
+Mohamed Salah,MID,Liverpool,18.0,15.0,29.0
+Mohammed Kudus,MID,West Ham,4.0,7.0,5.0
+Moisés Caicedo Corozo,MID,Chelsea,4.0,12.0,1.0
+Morgan Gibbs-White,MID,Nott'm Forest,11.0,13.0,7.0
+Morgan Rogers,MID,Aston Villa,11.0,10.0,8.0
+Moussa Diaby,MID,Aston Villa,0.0,0.0,0.0
+Murillo Santiago Costa dos Santos,DEF,Nott'm Forest,0.0,12.0,2.0
+Mykhailo Mudryk,MID,Chelsea,0.0,0.0,0.0
+Myles Lewis-Skelly,MID,Arsenal,0.0,5.0,1.0
+Myles Peart-Harris,MID,Brentford,0.0,0.0,0.0
+Naouirou Ahamada,MID,Crystal Palace,0.0,0.0,0.0
+Nasser Djiga,DEF,Wolves,0.0,0.0,0.0
+Nathan Aké,DEF,Man City,0.0,3.0,0.0
+Nathan Broadhead,MID,Ipswich,0.0,2.0,2.0
+Nathan Butler-Oyedeji,FWD,Arsenal,0.0,0.0,0.0
+Nathan Collins,DEF,Brentford,7.0,8.0,2.0
+Nathan Fraser,FWD,Wolves,0.0,0.0,0.0
+Nathan Patterson,DEF,Everton,1.0,0.0,0.0
+Nathan Wood-Gordon,DEF,Southampton,0.0,1.0,0.0
+Nathaniel Clyne,DEF,Crystal Palace,0.0,1.0,0.0
+Nathaniel Phillips,DEF,Liverpool,0.0,0.0,0.0
+Nayef Aguerd,DEF,West Ham,0.0,0.0,0.0
+Neal Maupay,FWD,Everton,0.0,0.0,0.0
+Neco Williams,DEF,Nott'm Forest,3.0,10.0,1.0
+Nick Pope,GK,Newcastle,0.0,8.0,0.0
+Niclas Füllkrug,FWD,West Ham,2.0,2.0,3.0
+Nico González,MID,Man City,1.0,6.0,1.0
+Nico O'Reilly,MID,Man City,0.0,3.0,2.0
+Nicolas Jackson,FWD,Chelsea,6.0,11.0,10.0
+Nicolás Domínguez,MID,Nott'm Forest,1.0,7.0,0.0
+Nikola Milenković,DEF,Nott'm Forest,2.0,13.0,5.0
+Noni Madueke,MID,Chelsea,5.0,6.0,7.0
+Norberto Bercique Gomes Betuncal,FWD,Everton,0.0,4.0,8.0
+Norberto Murara Neto,GK,Arsenal,0.0,0.0,0.0
+Norberto Murara Neto,GK,Bournemouth,0.0,0.0,0.0
+Noussair Mazraoui,DEF,Man Utd,1.0,7.0,0.0
+Nuno Herlander Simões Espírito Santo,AM,Nott'm Forest,0.0,0.0,0.0
+Nélson Cabral Semedo,DEF,Wolves,4.0,8.0,0.0
+Odeluga Offiah,DEF,Brighton,0.0,0.0,0.0
+Odsonne Edouard,FWD,Crystal Palace,0.0,0.0,0.0
+Odsonne Edouard,FWD,Leicester,0.0,0.0,0.0
+Odysseas Vlachodimos,GK,Newcastle,0.0,0.0,0.0
+Ola Aina,DEF,Nott'm Forest,1.0,12.0,2.0
+Olabade Aluko,DEF,Leicester,0.0,0.0,0.0
+Oleksandr Zinchenko,DEF,Arsenal,1.0,4.0,0.0
+Oliver Glasner,AM,Crystal Palace,0.0,0.0,0.0
+Oliver Skipp,MID,Leicester,0.0,3.0,0.0
+Oliver Skipp,MID,Spurs,0.0,0.0,0.0
+Oliwier Zych,GK,Aston Villa,0.0,0.0,0.0
+Ollie Scarles,DEF,West Ham,0.0,2.0,0.0
+Ollie Watkins,FWD,Aston Villa,8.0,10.0,16.0
+Omar Marmoush,FWD,Man City,1.0,8.0,7.0
+Omar Richards,DEF,Nott'm Forest,0.0,0.0,0.0
+Omari Giraud-Hutchinson,MID,Ipswich,3.0,3.0,3.0
+Omari Kellyman,MID,Chelsea,0.0,0.0,0.0
+Orel Mangala,MID,Everton,0.0,5.0,1.0
+Oscar Bobb,MID,Man City,0.0,0.0,0.0
+Pablo Sarabia,MID,Wolves,2.0,1.0,3.0
+Pape Matar Sarr,MID,Spurs,2.0,2.0,3.0
+Paris Maghoma,MID,Brentford,0.0,0.0,0.0
+Pascal Groß,MID,Brighton,0.0,0.0,0.0
+Patrick Dorgu,DEF,Man Utd,0.0,2.0,0.0
+Patson Daka,FWD,Leicester,0.0,1.0,1.0
+Pau Torres,DEF,Aston Villa,0.0,5.0,0.0
+Paul Onuachu,FWD,Southampton,1.0,1.0,4.0
+Pedro Cardoso de Lima,DEF,Wolves,0.0,0.0,0.0
+Pedro Lomba Neto,MID,Chelsea,6.0,8.0,4.0
+Pedro Porro,DEF,Spurs,6.0,6.0,2.0
+Pep Guardiola,AM,Man City,0.0,0.0,0.0
+Pervis Estupiñán,DEF,Brighton,1.0,3.0,1.0
+Phil Foden,MID,Man City,3.0,6.0,7.0
+Philip Billing,MID,Bournemouth,0.0,0.0,0.0
+Pierre-Emile Højbjerg,MID,Spurs,0.0,0.0,0.0
+Radu Drăgușin,DEF,Spurs,0.0,2.0,0.0
+Raheem Sterling,MID,Arsenal,2.0,1.0,0.0
+Raheem Sterling,MID,Chelsea,0.0,0.0,0.0
+Ramón Sosa,MID,Nott'm Forest,0.0,1.0,1.0
+Rasmus Højlund,FWD,Man Utd,1.0,6.0,4.0
+Rayan Aït-Nouri,DEF,Wolves,7.0,7.0,4.0
+Raúl Jiménez,FWD,Fulham,3.0,7.0,12.0
+Reece James,DEF,Chelsea,2.0,3.0,1.0
+Reece Welch,DEF,Everton,0.0,0.0,0.0
+Reiss Nelson,MID,Arsenal,0.0,0.0,0.0
+Reiss Nelson,MID,Fulham,1.0,1.0,1.0
+Remi Matthews,GK,Crystal Palace,0.0,0.0,0.0
+Remy Rees-Dottin,FWD,Bournemouth,0.0,0.0,0.0
+Renato Palma Veiga,MID,Chelsea,0.0,1.0,0.0
+Rhys Williams,DEF,Liverpool,0.0,0.0,0.0
+Ricardo Barbosa Pereira,DEF,Leicester,0.0,0.0,0.0
+Riccardo Calafiori,DEF,Arsenal,1.0,1.0,2.0
+Richarlison de Andrade,FWD,Spurs,1.0,1.0,4.0
+Rico Henry,DEF,Brentford,0.0,0.0,0.0
+Rico Lewis,DEF,Man City,2.0,5.0,1.0
+Rob Holding,DEF,Crystal Palace,0.0,0.0,0.0
+Robert Sánchez,GK,Chelsea,0.0,10.0,0.0
+Robin Olsen,GK,Aston Villa,0.0,1.0,0.0
+Rodrigo 'Rodri' Hernandez,MID,Man City,0.0,0.0,0.0
+Rodrigo Bentancur,MID,Spurs,0.0,3.0,2.0
+Rodrigo Martins Gomes,MID,Wolves,0.0,1.0,2.0
+Rodrigo Muniz Carvalho,FWD,Fulham,1.0,2.0,8.0
+Romain Esse,MID,Crystal Palace,2.0,0.0,1.0
+Romain Faivre,MID,Bournemouth,0.0,0.0,0.0
+Roman Dixon,DEF,Everton,0.0,0.0,0.0
+Romelu Lukaku Bolingoli,FWD,Chelsea,0.0,0.0,0.0
+Roméo Lavia,MID,Chelsea,1.0,3.0,0.0
+Ronnie Edwards,DEF,Southampton,0.0,0.0,0.0
+Ross Barkley,MID,Aston Villa,1.0,1.0,3.0
+Ross Stewart,FWD,Southampton,0.0,1.0,1.0
+Ruairi McConville,DEF,Brighton,0.0,0.0,0.0
+Ruben Filipe Marques Diogo Amorim,AM,Man Utd,0.0,0.0,0.0
+Ruud van Nistelrooij,AM,Leicester,0.0,0.0,0.0
+Ryan Christie,MID,Bournemouth,3.0,8.0,2.0
+Ryan Fraser,MID,Newcastle,0.0,0.0,0.0
+Ryan Fraser,MID,Southampton,0.0,0.0,0.0
+Ryan Gravenberch,MID,Liverpool,4.0,14.0,0.0
+Ryan Manning,DEF,Southampton,2.0,1.0,0.0
+Ryan Sessegnon,DEF,Fulham,2.0,1.0,4.0
+Ryan Trevitt,MID,Brentford,0.0,0.0,0.0
+Ryan Yates,MID,Nott'm Forest,2.0,6.0,2.0
+Rúben Gato Alves Dias,DEF,Man City,0.0,11.0,0.0
+Salah-Eddine Oulad M'hand,MID,Arsenal,0.0,0.0,0.0
+Sam Johnstone,GK,Crystal Palace,0.0,0.0,0.0
+Sam Johnstone,GK,Wolves,0.0,0.0,0.0
+Sam Morsy,MID,Ipswich,1.0,2.0,1.0
+Sam Szmodics,MID,Ipswich,0.0,2.0,4.0
+Sammy Braybrooke,MID,Leicester,0.0,0.0,0.0
+Samuel Amissah,DEF,Fulham,0.0,0.0,0.0
+Samuel Amo-Ameyaw,MID,Southampton,0.0,0.0,0.0
+Samuel Edozie,MID,Southampton,0.0,0.0,0.0
+Samuel Iling-Junior,MID,Aston Villa,0.0,0.0,0.0
+Samuel Rak-Sakyi,MID,Chelsea,0.0,0.0,0.0
+Sander Berge,MID,Fulham,0.0,4.0,0.0
+Sandro Tonali,MID,Newcastle,2.0,11.0,4.0
+Santiago Bueno,DEF,Wolves,0.0,5.0,0.0
+Saša Kalajdžić,FWD,Wolves,0.0,0.0,0.0
+Saša Lukić,MID,Fulham,2.0,4.0,0.0
+Scott Carson,GK,Man City,0.0,0.0,0.0
+Scott McTominay,MID,Man Utd,0.0,0.0,0.0
+Sean Longstaff,MID,Newcastle,1.0,2.0,0.0
+Sean Neave,FWD,Newcastle,0.0,0.0,0.0
+Sepp van den Berg,DEF,Brentford,1.0,5.0,0.0
+Sepp van den Berg,DEF,Liverpool,0.0,0.0,0.0
+Sergio Reguilón,DEF,Spurs,0.0,0.0,0.0
+Shea Charles,MID,Southampton,0.0,0.0,0.0
+Shumaira Mheuka,FWD,Chelsea,0.0,0.0,0.0
+Sil Swinkels,DEF,Aston Villa,0.0,0.0,0.0
+Simon Adingra,MID,Brighton,3.0,2.0,2.0
+Simon Rusk,AM,Southampton,0.0,0.0,0.0
+Solly March,MID,Brighton,0.0,0.0,0.0
+Somto Boniface,DEF,Ipswich,0.0,0.0,0.0
+Son Heung-min,MID,Spurs,10.0,4.0,7.0
+Spike Brits,GK,Man City,0.0,0.0,0.0
+Stefan Bajčetić Maquieira,MID,Liverpool,0.0,0.0,0.0
+Stefan Ortega Moreno,GK,Man City,0.0,3.0,0.0
+Stephy Mavididi,MID,Leicester,1.0,1.0,4.0
+Steven Benda,GK,Fulham,0.0,0.0,0.0
+Sugawara Yukinari,DEF,Southampton,1.0,2.0,1.0
+Sven Botman,DEF,Newcastle,0.0,2.0,0.0
+Sávio 'Savinho' Moreira de Oliveira,MID,Man City,11.0,8.0,1.0
+Séamus Coleman,DEF,Everton,0.0,0.0,0.0
+Sékou Koné,MID,Man Utd,0.0,0.0,0.0
+Sékou Mara,FWD,Southampton,0.0,0.0,0.0
+Taiwo Awoniyi,FWD,Nott'm Forest,0.0,1.0,1.0
+Tariq Lamptey,DEF,Brighton,2.0,2.0,2.0
+Tawanda Chirewa,MID,Wolves,0.0,0.0,0.0
+Taylor Harwood-Bellis,DEF,Southampton,0.0,3.0,1.0
+Thomas Frank,AM,Brentford,0.0,0.0,0.0
+Thomas Partey,MID,Arsenal,3.0,9.0,4.0
+Thomas Wilson-Brown,DEF,Leicester,0.0,0.0,0.0
+Tim Iroegbunam,MID,Everton,1.0,0.0,0.0
+Tim Ream,DEF,Fulham,0.0,0.0,0.0
+Timo Werner,MID,Spurs,3.0,1.0,0.0
+Timothy Castagne,DEF,Fulham,1.0,3.0,0.0
+Tino Livramento,DEF,Newcastle,1.0,10.0,0.0
+Toby Collyer,MID,Man Utd,0.0,0.0,0.0
+Tom Cairney,MID,Fulham,0.0,1.0,2.0
+Tom Cannon,FWD,Leicester,0.0,0.0,0.0
+Tom Edozie,MID,Wolves,0.0,0.0,0.0
+Tom Heaton,GK,Man Utd,0.0,0.0,0.0
+Tom King,GK,Wolves,0.0,0.0,0.0
+Tom Taylor,MID,Ipswich,0.0,0.0,0.0
+Tomiyasu Takehiro,DEF,Arsenal,0.0,0.0,0.0
+Tommy Doyle,MID,Wolves,1.0,0.0,0.0
+Tommy Setford,GK,Arsenal,0.0,0.0,0.0
+Tomáš Souček,MID,West Ham,2.0,7.0,9.0
+Tony Yogane,MID,Brentford,0.0,0.0,0.0
+Tosin Adarabioyo,DEF,Chelsea,1.0,7.0,1.0
+Toti António Gomes,DEF,Wolves,1.0,8.0,0.0
+Trent Alexander-Arnold,DEF,Liverpool,7.0,12.0,3.0
+Trevoh Chalobah,DEF,Chelsea,1.0,3.0,0.0
+Trevoh Chalobah,DEF,Crystal Palace,0.0,3.0,3.0
+Treymaurice Nyoni,MID,Liverpool,0.0,0.0,0.0
+Tyler Adams,MID,Bournemouth,3.0,6.0,0.0
+Tyler Dibling,MID,Southampton,2.0,3.0,2.0
+Tyler Fredricson,DEF,Man Utd,0.0,0.0,0.0
+Tyler Morton,MID,Liverpool,0.0,0.0,0.0
+Tyrell Malacia,DEF,Man Utd,0.0,0.0,0.0
+Tyrick Mitchell,DEF,Crystal Palace,6.0,12.0,0.0
+Tyrique George,MID,Chelsea,1.0,1.0,1.0
+Tyrone Mings,DEF,Aston Villa,1.0,4.0,0.0
+Unai Emery,AM,Aston Villa,0.0,0.0,0.0
+Valentín Barco,DEF,Brighton,0.0,0.0,0.0
+Victor Kristiansen,DEF,Leicester,1.0,1.0,0.0
+Victor Lindelöf,DEF,Man Utd,0.0,2.0,0.0
+Viljami Sinisalo,GK,Aston Villa,0.0,0.0,0.0
+Virgil van Dijk,DEF,Liverpool,1.0,14.0,3.0
+Vitalii Mykolenko,DEF,Everton,3.0,11.0,1.0
+Vitaly Janelt,MID,Brentford,3.0,6.0,1.0
+Vitor de Oliveira Nunes dos Reis,DEF,Man City,0.0,0.0,0.0
+Vladimír Coufal,DEF,West Ham,0.0,2.0,0.0
+Vítezslav Jaros,GK,Liverpool,0.0,0.0,0.0
+Vítor Manuel de Oliveira Lopes Pereira,AM,Wolves,0.0,0.0,0.0
+Wanya Marçal-Madivádua,MID,Leicester,0.0,0.0,0.0
+Wayne Hennessey,GK,Nott'm Forest,0.0,0.0,0.0
+Welington Damascena Santos,DEF,Southampton,0.0,1.0,0.0
+Wes Burns,MID,Ipswich,1.0,1.0,0.0
+Wes Foderingham,GK,West Ham,0.0,0.0,0.0
+Wes Okoduwa,DEF,Wolves,0.0,0.0,0.0
+Wesley Fofana,DEF,Chelsea,0.0,2.0,0.0
+Wilfred Ndidi,MID,Leicester,5.0,3.0,0.0
+Will Alves,MID,Leicester,0.0,0.0,0.0
+Will Dennis,GK,Bournemouth,0.0,0.0,0.0
+Will Hughes,MID,Crystal Palace,4.0,10.0,0.0
+Will Lankshear,FWD,Spurs,0.0,0.0,0.0
+Will Smallbone,MID,Southampton,0.0,0.0,1.0
+William Osula,FWD,Newcastle,0.0,0.0,1.0
+William Saliba,DEF,Arsenal,0.0,12.0,2.0
+Willian Borges da Silva,MID,Fulham,0.0,1.0,0.0
+Willy Boly,DEF,Nott'm Forest,0.0,0.0,0.0
+Wilson Odobert,MID,Spurs,0.0,1.0,1.0
+Wout Faes,DEF,Leicester,0.0,3.0,1.0
+Woyo Coulibaly,DEF,Leicester,0.0,0.0,0.0
+Yankuba Minteh,MID,Brighton,5.0,4.0,6.0
+Yasin Ayari,MID,Brighton,1.0,7.0,2.0
+Yehor Yarmoliuk,MID,Brentford,0.0,3.0,0.0
+Yerson Mosquera,DEF,Wolves,0.0,0.0,0.0
+Yoane Wissa,FWD,Brentford,6.0,9.0,18.0
+Youri Tielemans,MID,Aston Villa,7.0,7.0,3.0
+Youssef Ramalho Chermiti,FWD,Everton,0.0,0.0,0.0
+Yunus Emre Konak,MID,Brentford,0.0,0.0,0.0
+Yves Bissouma,MID,Spurs,0.0,3.0,2.0
+Zach Abbott,DEF,Nott'm Forest,0.0,0.0,0.0
+Zach Marsh,FWD,Crystal Palace,0.0,0.0,0.0
+Zain Silcott-Duberry,MID,Bournemouth,0.0,0.0,0.0
+Álex Moreno Lopera,DEF,Aston Villa,0.0,0.0,0.0
+Álex Moreno Lopera,DEF,Nott'm Forest,1.0,3.0,0.0
+Ângelo Gabriel Borges Damaceno,MID,Chelsea,0.0,0.0,0.0
+Đorđe Petrović,GK,Chelsea,0.0,0.0,0.0
+Łukasz Fabiański,GK,West Ham,0.0,2.0,0.0
