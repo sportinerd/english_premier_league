@@ -4,7 +4,7 @@ from pymongo.errors import ConnectionFailure
 # --- MongoDB Connection Settings ---
 # The source database and collection
 INPUT_DB_URI = "mongodb://localhost:27017/"
-INPUT_DB_NAME = "all_league"
+INPUT_DB_NAME = "English_premier_league"
 INPUT_COLLECTION_NAME = "cleaned_all_data"  # The collection where all league data is stored.
 
 # The new database and collection for EPL data

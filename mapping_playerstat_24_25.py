@@ -19,7 +19,7 @@ JSON_COLL_NAME = "mapped_fantasy_player"
 OUT_MAPPED_COLL_NAME = "player_stat_24_25_mapped"
 
 # Unmapped go to a separate DB (per your instruction: "separate db")
-UNMAPPED_DB_NAME = "English_premier_league_unmapped"
+UNMAPPED_DB_NAME = "English_premier_league"
 UNMAPPED_COLL_NAME = "player_stat_24_25_unmapped"
 
 # --- Utility: text normalization ---

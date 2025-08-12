@@ -3,22 +3,39 @@ import sys
 import subprocess
 import json
 import time
+import logging
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional, Tuple
 import pandas as pd
 import numpy as np
 from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure
-from fastapi import FastAPI, HTTPException
+from pymongo.errors import ConnectionFailure, PyMongoError
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import uvicorn
 from scipy.stats import poisson
 from bson import ObjectId
+from contextlib import contextmanager
+import backoff
+from functools import lru_cache
 
-# Configuration
-MONGODB_URI = "mongodb://localhost:27017/"
-SCRIPT_DIR = r"F:\Arifin bhai\english_premier_league"
-os.chdir(SCRIPT_DIR)
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('epl_api.log')
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Configuration - using environment variables with defaults
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
+API_HOST = os.getenv("API_HOST", "0.0.0.0")
+API_PORT = int(os.getenv("API_PORT", "8000"))
+DB_NAME = os.getenv("DB_NAME", "English_premier_league")
 
 # Team name mapping (common to all scripts)
 EPL_TEAM_NAME_MAPPING = {
@@ -38,42 +55,83 @@ EPL_TEAM_NAME_MAPPING = {
 
 def run_process_all_league_data():
     """Run the process_all_league_data_mongo.py script"""
-    print("=== Running process_all_league_data_mongo.py ===")
+    logger.info("=== Running process_all_league_data_mongo.py ===")
     try:
         # Set environment to handle UTF-8 encoding
         env = os.environ.copy()
         env['PYTHONIOENCODING'] = 'utf-8'
         
         # Run without capturing output to avoid encoding issues
-        subprocess.run([sys.executable, "process_all_league_data_mongo.py"], 
-                      check=True, env=env)
-        print("process_all_league_data_mongo.py completed successfully")
+        result = subprocess.run(
+            [sys.executable, "process_all_league_data_mongo.py"], 
+            check=True, 
+            env=env,
+            timeout=300  # 5 minute timeout
+        )
+        logger.info("process_all_league_data_mongo.py completed successfully")
+    except subprocess.TimeoutExpired:
+        logger.error("Timeout running process_all_league_data_mongo.py")
+        sys.exit(1)
     except subprocess.CalledProcessError as e:
-        print(f"Error running process_all_league_data_mongo.py: {e}")
+        logger.error(f"Error running process_all_league_data_mongo.py: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Unexpected error running process_all_league_data_mongo.py: {e}")
         sys.exit(1)
 
 def run_from_cleandata_epl():
     """Run the from_cleandata_epl.py script"""
-    print("\n=== Running from_cleandata_epl.py ===")
+    logger.info("=== Running from_cleandata_epl.py ===")
     try:
         # Set environment to handle UTF-8 encoding
         env = os.environ.copy()
         env['PYTHONIOENCODING'] = 'utf-8'
         
         # Run without capturing output to avoid encoding issues
-        subprocess.run([sys.executable, "from_cleandata_epl.py"], 
-                      check=True, env=env)
-        print("from_cleandata_epl.py completed successfully")
+        result = subprocess.run(
+            [sys.executable, "from_cleandata_epl.py"], 
+            check=True, 
+            env=env,
+            timeout=300  # 5 minute timeout
+        )
+        logger.info("from_cleandata_epl.py completed successfully")
+    except subprocess.TimeoutExpired:
+        logger.error("Timeout running from_cleandata_epl.py")
+        sys.exit(1)
     except subprocess.CalledProcessError as e:
-        print(f"Error running from_cleandata_epl.py: {e}")
+        logger.error(f"Error running from_cleandata_epl.py: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Unexpected error running from_cleandata_epl.py: {e}")
         sys.exit(1)
 
 # ============================================================================
 # PART 2: COMBINED API FUNCTIONALITY
 # ============================================================================
 
+# Context manager for MongoDB connections
+@contextmanager
+def get_mongo_connection():
+    """Context manager for MongoDB connections"""
+    client = None
+    try:
+        client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+        # Test the connection
+        client.admin.command('ping')
+        yield client
+    except ConnectionFailure as e:
+        logger.error(f"MongoDB connection error: {e}")
+        raise HTTPException(status_code=503, detail="Database service unavailable")
+    except PyMongoError as e:
+        logger.error(f"MongoDB error: {e}")
+        raise HTTPException(status_code=500, detail="Database error")
+    finally:
+        if client:
+            client.close()
+
 # Common utility functions
 def convert_mongo_ids(data):
+    """Recursively convert MongoDB ObjectId to string"""
     if isinstance(data, list):
         return [convert_mongo_ids(item) for item in data]
     if isinstance(data, dict):
@@ -82,7 +140,9 @@ def convert_mongo_ids(data):
         return str(data)
     return data
 
+@lru_cache(maxsize=1000)
 def convert_american_to_decimal(american_odds_str: str) -> Optional[float]:
+    """Convert American odds to decimal with caching for performance"""
     if not isinstance(american_odds_str, str) or not american_odds_str:
         return None
     try:
@@ -91,20 +151,28 @@ def convert_american_to_decimal(american_odds_str: str) -> Optional[float]:
     except (ValueError, TypeError):
         return None
 
-def load_data_from_mongo(collection_name: str, db_name: str = "English_premier_league", is_single_doc: bool = False) -> Any:
+@backoff.on_exception(backoff.expo, PyMongoError, max_tries=3, max_time=30)
+def load_data_from_mongo(collection_name: str, db_name: str = DB_NAME, is_single_doc: bool = False) -> Any:
+    """Load data from MongoDB with retries and proper error handling"""
     try:
-        client = MongoClient(MONGODB_URI)
-        collection = client[db_name][collection_name]
-        data = collection.find_one() if is_single_doc else list(collection.find({}))
-        client.close()
-        if data:
-            print(f"API: Loaded data from '{db_name}.{collection_name}'.")
+        with get_mongo_connection() as client:
+            collection = client[db_name][collection_name]
+            data = collection.find_one() if is_single_doc else list(collection.find({}))
+            
+            if not data:
+                logger.warning(f"No data found in '{collection_name}'")
+                raise HTTPException(status_code=404, detail=f"No data found in '{collection_name}'.")
+            
+            logger.info(f"Loaded data from '{db_name}.{collection_name}'")
             return convert_mongo_ids(data)
-        raise HTTPException(status_code=404, detail=f"No data found in '{collection_name}'.")
+    except HTTPException:
+        raise
     except Exception as e:
+        logger.error(f"Unexpected error loading data from MongoDB: {e}")
         raise HTTPException(status_code=500, detail=f"MongoDB Error for {collection_name}: {e}")
 
 def parse_match_name(match_name: str, team_map: Dict) -> Tuple[str, str]:
+    """Parse match name into home and away teams using mapping"""
     delimiters = [' v ', ' vs ', ' - ']
     for d in delimiters:
         if d in match_name:
@@ -114,14 +182,20 @@ def parse_match_name(match_name: str, team_map: Dict) -> Tuple[str, str]:
 
 # FDR API Functions
 def fdr_process_all_epl_data():
-    print("API: --- Starting Shared EPL Data Processing for FDR ---")
-    # Fix: Set is_single_doc=True for EPL odds data
-    epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
-    sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
+    """Process all EPL data for FDR calculation"""
+    logger.info("API: --- Starting Shared EPL Data Processing for FDR ---")
+    
+    # Load data with error handling
+    try:
+        epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
+        sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
+    except HTTPException:
+        raise
     
     # Generate team details
     all_teams = set(fix['home_team_name'] for fix in sportsmonk_fixtures if 'home_team_name' in fix)
     all_teams.update(fix['away_team_name'] for fix in sportsmonk_fixtures if 'away_team_name' in fix)
+    
     team_details = {}
     for i, team_name in enumerate(all_teams):
         short_code_parts = [word[0] for word in team_name.split() if word[0].isupper()]
@@ -138,10 +212,15 @@ def fdr_process_all_epl_data():
         start_time = fix.get('starting_at')
         if not start_time: 
             continue
-        st_obj = datetime.fromisoformat(start_time['$date'].replace('Z', '+00:00')) if isinstance(start_time, dict) else start_time
-        if st_obj:
-            fix['parsed_start_time'] = st_obj
-            sportsmonk_lookup[(fix['home_team_name'], fix['away_team_name'], st_obj.strftime('%Y-%m-%d'))] = fix
+            
+        try:
+            st_obj = datetime.fromisoformat(start_time['$date'].replace('Z', '+00:00')) if isinstance(start_time, dict) else start_time
+            if st_obj:
+                fix['parsed_start_time'] = st_obj
+                sportsmonk_lookup[(fix['home_team_name'], fix['away_team_name'], st_obj.strftime('%Y-%m-%d'))] = fix
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error parsing start time for fixture: {e}")
+            continue
     
     mapped_fixtures = []
     for match_id, odds in epl_odds_data.get('matches', {}).items():
@@ -149,6 +228,7 @@ def fdr_process_all_epl_data():
         st_str = odds.get('start_time')
         if h == "Unknown" or not st_str: 
             continue
+            
         try:
             date_obj = datetime.fromisoformat(st_str.replace('Z', '+00:00'))
             key = (h, a, date_obj.strftime('%Y-%m-%d'))
@@ -167,7 +247,8 @@ def fdr_process_all_epl_data():
                     'gameweek': s_fix.get('GW'),
                     'correct_score_odds': odds.get('markets', {}).get('Correct Score')
                 })
-        except ValueError: 
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error processing match {match_id}: {e}")
             continue
     
     # Extract outright odds
@@ -353,16 +434,20 @@ def fdr_process_all_epl_data():
             'top_5_score_predictions': top_5_scores
         })
     
-    print(f"\nAPI: --- FDR Processing Finished. Generated data for {len(results)} fixtures. ---")
+    logger.info(f"API: --- FDR Processing Finished. Generated data for {len(results)} fixtures. ---")
     return results
 
 # Player Predictions API Functions
 def aga_process_epl_predictions():
-    print("API: --- Starting EPL Player Predictions Processing ---")
-    # Fix: Set is_single_doc=True for EPL odds data
-    epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
-    sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
-    player_stats_raw = load_data_from_mongo("player_stat_24_25_mapped")
+    """Process EPL player predictions"""
+    logger.info("API: --- Starting EPL Player Predictions Processing ---")
+    
+    try:
+        epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
+        sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
+        player_stats_raw = load_data_from_mongo("player_stat_24_25_mapped")
+    except HTTPException:
+        raise
     
     # Prepare player stats
     df = pd.DataFrame(player_stats_raw)
@@ -396,18 +481,19 @@ def aga_process_epl_predictions():
             continue
         
         start_time_obj = None
-        if isinstance(start_time_val, datetime):
-            start_time_obj = start_time_val.replace(tzinfo=timezone.utc)
-        elif isinstance(start_time_val, str):
-            try:
+        try:
+            if isinstance(start_time_val, datetime):
+                start_time_obj = start_time_val.replace(tzinfo=timezone.utc)
+            elif isinstance(start_time_val, str):
                 start_time_obj = datetime.fromisoformat(start_time_val.replace('Z', '+00:00'))
-            except ValueError:
-                continue
-        
-        if start_time_obj:
-            fixture['parsed_start_time'] = start_time_obj
-            date_str = start_time_obj.strftime('%Y-%m-%d')
-            sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
+            
+            if start_time_obj:
+                fixture['parsed_start_time'] = start_time_obj
+                date_str = start_time_obj.strftime('%Y-%m-%d')
+                sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error parsing fixture start time: {e}")
+            continue
     
     mapped_fixtures = []
     for odds_details in epl_odds_data.get('matches', {}).values():
@@ -454,7 +540,7 @@ def aga_process_epl_predictions():
     all_match_predictions = []
     for fixture in mapped_fixtures:
         home_team, away_team = fixture['home_team'], fixture['away_team']
-        print(f"Processing: {home_team} vs {away_team}")
+        logger.info(f"Processing: {home_team} vs {away_team}")
         
         home_details = team_details_lookup.get(home_team, {})
         away_details = team_details_lookup.get(away_team, {})
@@ -601,16 +687,20 @@ def aga_process_epl_predictions():
         
         all_match_predictions.append(match_output)
     
-    print(f"\n--- SUCCESS: Processed {len(all_match_predictions)} matches. ---")
+    logger.info(f"--- SUCCESS: Processed {len(all_match_predictions)} matches. ---")
     return all_match_predictions
 
 # Player Points API Functions
 def pp_process_epl_player_points():
-    print("API: --- Starting Enhanced EPL Player Points Processing ---")
-    # Fix: Set is_single_doc=True for EPL odds data
-    epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
-    sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
-    player_stats_raw = load_data_from_mongo("player_stat_24_25_mapped")
+    """Process EPL player points with enhanced model"""
+    logger.info("API: --- Starting Enhanced EPL Player Points Processing ---")
+    
+    try:
+        epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
+        sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture")
+        player_stats_raw = load_data_from_mongo("player_stat_24_25_mapped")
+    except HTTPException:
+        raise
     
     # Prepare player stats with enhanced metrics
     df = pd.DataFrame(player_stats_raw)
@@ -708,18 +798,19 @@ def pp_process_epl_player_points():
             continue
         
         start_time_obj = None
-        if isinstance(start_time_val, datetime):
-            start_time_obj = start_time_val.replace(tzinfo=timezone.utc)
-        elif isinstance(start_time_val, str):
-            try:
+        try:
+            if isinstance(start_time_val, datetime):
+                start_time_obj = start_time_val.replace(tzinfo=timezone.utc)
+            elif isinstance(start_time_val, str):
                 start_time_obj = datetime.fromisoformat(start_time_val.replace('Z', '+00:00'))
-            except ValueError:
-                continue
-        
-        if start_time_obj:
-            fixture['parsed_start_time'] = start_time_obj
-            date_str = start_time_obj.strftime('%Y-%m-%d')
-            sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
+            
+            if start_time_obj:
+                fixture['parsed_start_time'] = start_time_obj
+                date_str = start_time_obj.strftime('%Y-%m-%d')
+                sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
+        except (ValueError, TypeError) as e:
+            logger.warning(f"Error parsing fixture start time: {e}")
+            continue
     
     mapped_fixtures = []
     for odds_details in epl_odds_data.get('matches', {}).values():
@@ -765,7 +856,7 @@ def pp_process_epl_player_points():
     all_match_predictions = []
     for fixture in mapped_fixtures:
         home_team, away_team = fixture['home_team_name'], fixture['away_team_name']
-        print(f"Processing: {home_team} vs {away_team}")
+        logger.info(f"Processing: {home_team} vs {away_team}")
         
         home_details = team_details_lookup.get(home_team, {})
         away_details = team_details_lookup.get(away_team, {})
@@ -988,7 +1079,7 @@ def pp_process_epl_player_points():
         match_output["players"].sort(key=lambda x: x.get('expected_points', 0), reverse=True)
         all_match_predictions.append(match_output)
     
-    print(f"\n--- SUCCESS: Processed {len(all_match_predictions)} matches with enhanced model. ---")
+    logger.info(f"--- SUCCESS: Processed {len(all_match_predictions)} matches with enhanced model. ---")
     return all_match_predictions
 
 # ============================================================================
@@ -998,32 +1089,45 @@ def pp_process_epl_player_points():
 app = FastAPI(
     title="Unified EPL Analysis API",
     description="Combined API for FDR, Player Predictions, and Player Points",
-    version="1.0.0"
+    version="1.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # In production, replace with specific origins
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Exception handler for consistent error responses
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    logger.error(f"Unhandled exception: {exc}", exc_info=True)
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "An unexpected error occurred. Please try again later."}
+    )
+
 # FDR Endpoints
-@app.get("/epl-fdr-results", summary="Get detailed FDR and team strength metrics for all fixtures")
+@app.get("/epl-fdr-results", summary="Get detailed FDR and team strength metrics for all fixtures", response_model=List[Dict[str, Any]])
 async def get_epl_fdr_data():
+    """Get detailed FDR and team strength metrics for all fixtures"""
     try:
         all_data = fdr_process_all_epl_data()
         return all_data
     except HTTPException as e:
         raise e
     except Exception as e:
-        print(f"An unexpected error occurred in FDR endpoint: {e}")
+        logger.error(f"An unexpected error occurred in FDR endpoint: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error during FDR calculation.")
 
-@app.get("/epl-top-score-predictions", summary="Get top 5 score predictions for all fixtures")
+@app.get("/epl-top-score-predictions", summary="Get top 5 score predictions for all fixtures", response_model=List[Dict[str, Any]])
 async def get_epl_match_predictions():
+    """Get top 5 score predictions for all fixtures"""
     try:
         all_data = fdr_process_all_epl_data()
         prediction_results = []
@@ -1046,37 +1150,38 @@ async def get_epl_match_predictions():
     except HTTPException as e:
         raise e
     except Exception as e:
-        print(f"An unexpected error occurred in predictions endpoint: {e}")
+        logger.error(f"An unexpected error occurred in predictions endpoint: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal server error during prediction calculation.")
 
 # Player Predictions Endpoints
-@app.get("/epl-player-predictions", summary="Get EPL Player Predictions (AGS, AAS, CS)")
+@app.get("/epl-player-predictions", summary="Get EPL Player Predictions (AGS, AAS, CS)", response_model=List[Dict[str, Any]])
 async def get_epl_player_predictions():
+    """Get EPL Player Predictions (Anytime Goalscorer, Anytime Assist, Clean Sheet)"""
     try:
         results = aga_process_epl_predictions()
         return results
     except HTTPException as http_exc:
         raise http_exc
     except Exception as e:
-        import traceback
-        traceback.print_exc()
+        logger.error(f"An unexpected error occurred in player predictions endpoint: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"An internal server error occurred: {e}")
 
 # Player Points Endpoints
-@app.get("/epl-player-points", summary="Get Enhanced EPL Player Expected Points")
+@app.get("/epl-player-points", summary="Get Enhanced EPL Player Expected Points", response_model=List[Dict[str, Any]])
 async def get_epl_player_points():
+    """Get Enhanced EPL Player Expected Points"""
     try:
         results = pp_process_epl_player_points()
         return results
     except HTTPException as http_exc:
         raise http_exc
     except Exception as e:
-        import traceback
-        traceback.print_exc()
+        logger.error(f"An unexpected error occurred in player points endpoint: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"An internal server error occurred: {e}")
 
 @app.get("/health", summary="Health check endpoint")
 async def health_check():
+    """Health check endpoint to verify the API is running"""
     return {
         "status": "healthy", 
         "model_version": "1.0.0", 
@@ -1084,7 +1189,8 @@ async def health_check():
             "fdr_analysis", 
             "player_predictions", 
             "enhanced_player_points"
-        ]
+        ],
+        "timestamp": datetime.now().isoformat()
     }
 
 # ============================================================================
@@ -1092,15 +1198,22 @@ async def health_check():
 # ============================================================================
 
 if __name__ == "__main__":
-    print("=== Starting Unified EPL Analysis System ===")
+    logger.info("=== Starting Unified EPL Analysis System ===")
     
     # Run the first two scripts sequentially
     run_process_all_league_data()
     run_from_cleandata_epl()
     
-    print("\n=== Starting Unified API Server ===")
-    print("API will be available at: http://localhost:8000")
-    print("API Documentation at: http://localhost:8000/docs")
+    logger.info("=== Starting Unified API Server ===")
+    logger.info(f"API will be available at: http://{API_HOST}:{API_PORT}")
+    logger.info(f"API Documentation at: http://{API_HOST}:{API_PORT}/docs")
     
     # Start the FastAPI application
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=False)
+    uvicorn.run(
+        app, 
+        host=API_HOST, 
+        port=API_PORT, 
+        reload=False,
+        log_level="info",
+        access_log=True
+    )

@@ -1,0 +1,27 @@
+2025-08-12 12:26:22,380 - __main__ - INFO - === Starting Unified EPL Analysis System ===
+2025-08-12 12:26:22,380 - __main__ - INFO - === Running process_all_league_data_mongo.py ===
+2025-08-12 12:26:32,684 - __main__ - INFO - process_all_league_data_mongo.py completed successfully
+2025-08-12 12:26:32,685 - __main__ - INFO - === Running from_cleandata_epl.py ===
+2025-08-12 12:26:33,980 - __main__ - INFO - from_cleandata_epl.py completed successfully
+2025-08-12 12:26:33,980 - __main__ - INFO - === Starting Unified API Server ===
+2025-08-12 12:26:33,981 - __main__ - INFO - API will be available at: http://0.0.0.0:8000
+2025-08-12 12:26:33,981 - __main__ - INFO - API Documentation at: http://0.0.0.0:8000/docs
+2025-08-12 12:29:59,531 - __main__ - INFO - API: --- Starting Shared EPL Data Processing for FDR ---
+2025-08-12 12:29:59,839 - __main__ - INFO - Loaded data from 'English_premier_league.epl'
+2025-08-12 12:29:59,959 - __main__ - INFO - Loaded data from 'English_premier_league.sportsmonk_fixture'
+2025-08-12 12:30:00,420 - __main__ - INFO - API: --- FDR Processing Finished. Generated data for 10 fixtures. ---
+2025-08-12 12:30:09,226 - __main__ - INFO - API: --- Starting Enhanced EPL Player Points Processing ---
+2025-08-12 12:30:09,244 - __main__ - INFO - Loaded data from 'English_premier_league.epl'
+2025-08-12 12:30:09,334 - __main__ - INFO - Loaded data from 'English_premier_league.sportsmonk_fixture'
+2025-08-12 12:30:09,436 - __main__ - INFO - Loaded data from 'English_premier_league.player_stat_24_25_mapped'
+2025-08-12 12:30:09,832 - __main__ - INFO - Processing: Nottingham Forest vs Brentford
+2025-08-12 12:30:09,837 - __main__ - INFO - Processing: Sunderland vs West Ham United
+2025-08-12 12:30:09,843 - __main__ - INFO - Processing: Aston Villa vs Newcastle United
+2025-08-12 12:30:09,856 - __main__ - INFO - Processing: Liverpool vs AFC Bournemouth
+2025-08-12 12:30:09,865 - __main__ - INFO - Processing: Brighton & Hove Albion vs Fulham
+2025-08-12 12:30:09,875 - __main__ - INFO - Processing: Wolverhampton Wanderers vs Manchester City
+2025-08-12 12:30:09,889 - __main__ - INFO - Processing: Tottenham Hotspur vs Burnley
+2025-08-12 12:30:09,894 - __main__ - INFO - Processing: Chelsea vs Crystal Palace
+2025-08-12 12:30:09,906 - __main__ - INFO - Processing: Leeds United vs Everton
+2025-08-12 12:30:09,910 - __main__ - INFO - Processing: Manchester United vs Arsenal
+2025-08-12 12:30:09,923 - __main__ - INFO - --- SUCCESS: Processed 10 matches with enhanced model. ---
