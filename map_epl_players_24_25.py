@@ -22,12 +22,12 @@ logger = logging.getLogger(__name__)
 INPUT_JSON_FILE = "2024-25_processed.json"
 
 # Input Player Database (Sportsmonk)
-INPUT_DB_URI = "mongodb://localhost:27017/"
+INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 INPUT_DB_NAME = "English_premier_league"
 INPUT_PLAYER_COLLECTION = "Sportsmonk_player"
 
 # Output Database
-OUTPUT_DB_URI = "mongodb://localhost:27017/"
+OUTPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 OUTPUT_DB_NAME = "EPL_Player_Stats_Mapped"
 MAPPED_COLLECTION_NAME = "mapped_players_2024_25"
 UNMAPPED_COLLECTION_NAME = "unmapped_players_2024_25"

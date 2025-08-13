@@ -4,7 +4,7 @@ from pymongo import UpdateOne
 from bson.objectid import ObjectId
 
 # --- MongoDB Connection Details ---
-INPUT_DB_URI = "mongodb://localhost:27017/"
+INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 INPUT_DB_NAME = "Fantasy_LiveScoring"
 OUTPUT_COLLECTION_NAME = "mapped_fantasy_player"  # The name for the new collection
 

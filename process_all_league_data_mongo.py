@@ -7,7 +7,7 @@ from pymongo.errors import ConnectionFailure
 # ==============================================================================
 
 # --- Source MongoDB Configuration (Where to READ raw data from) ---
-SOURCE_DB_URI = "mongodb://localhost:27017/"
+SOURCE_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 SOURCE_DB_NAME = "English_premier_league"
 SOURCE_COLLECTION = "scrapped_all_league_data"
 

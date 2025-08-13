@@ -8,7 +8,7 @@ from pymongo import MongoClient
 from bson import ObjectId
 
 # --- MongoDB Connection Details ---
-INPUT_DB_URI = "mongodb://localhost:27017/"
+INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 
 # Source DB / Collections
 SRC_DB_NAME = "English_premier_league"

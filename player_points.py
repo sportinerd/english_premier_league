@@ -14,7 +14,7 @@ import math
 # ==============================================================================
 
 # --- MongoDB Connection Settings ---
-INPUT_DB_URI = "mongodb://localhost:27017/"
+INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 INPUT_DB_NAME = "English_premier_league"
 EPL_ODDS_COLLECTION = "epl"
 SPORTSMONK_FIXTURES_COLLECTION = "sportsmonk_fixture"

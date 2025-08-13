@@ -115,7 +115,7 @@ def get_mongo_connection():
     """Context manager for MongoDB connections"""
     client = None
     try:
-        client = MongoClient(MONGODB_URI, serverSelectionTimeoutMS=5000)
+        client = MongoClient("mongodb+srv://sanjid:VLlOF9IloqvEAsCf@fantasy-prod.n3xmwj.mongodb.net", serverSelectionTimeoutMS=5000)
         # Test the connection
         client.admin.command('ping')
         yield client

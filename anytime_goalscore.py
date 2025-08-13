@@ -12,7 +12,7 @@ from typing import List, Dict, Any, Optional, Tuple
 # ==============================================================================
 
 # --- MongoDB Connection Settings for your Brazilian Cup Data ---
-INPUT_DB_URI = "mongodb://localhost:27017/"
+INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 INPUT_DB_NAME = "Brazil_cup"
 INPUT_COLLECTION_NAME = "brazil_cup"
 
