@@ -17,6 +17,7 @@ def create_or_update_mapped_collection():
     """
     try:
         # 1. Establish connection to MongoDB
+        print(f"Connecting to MongoDB at {INPUT_DB_URI}...")
         client = pymongo.MongoClient(INPUT_DB_URI)
         db = client[INPUT_DB_NAME]
 
