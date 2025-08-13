@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 # --- MongoDB Connection Details ---
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
-INPUT_DB_NAME = "Fantasy_LiveScoring"
+INPUT_DB_NAME = "English_premier_league"
 OUTPUT_COLLECTION_NAME = "mapped_fantasy_player"  # The name for the new collection
 
 def create_or_update_mapped_collection():
