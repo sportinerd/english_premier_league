@@ -12,7 +12,8 @@ from fuzzywuzzy import fuzz, process
 import pandas as pd
 import json
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # --- Configuration ---
 
 # Configure logging

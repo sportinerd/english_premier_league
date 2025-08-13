@@ -2,7 +2,8 @@ import json
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # ==============================================================================
 # 1. MONGODB CONFIGURATION
 # ==============================================================================

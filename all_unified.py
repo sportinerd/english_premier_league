@@ -19,7 +19,8 @@ from bson import ObjectId
 from contextlib import contextmanager
 import backoff
 from functools import lru_cache
-
+from dotenv import load_dotenv
+load_dotenv()
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,

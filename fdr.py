@@ -5,7 +5,8 @@ from pymongo import MongoClient
 from fastapi import FastAPI, HTTPException
 import uvicorn
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # ==============================================================================
 # 1. CONFIGURATION SETTINGS
 # ==============================================================================

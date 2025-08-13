@@ -8,7 +8,8 @@ Run:
 import json
 from pathlib import Path
 from collections import OrderedDict
-
+from dotenv import load_dotenv
+load_dotenv()
 # ---------------------------------------------------------
 # 1. Hard-coded path – change only if the file moves
 # ---------------------------------------------------------

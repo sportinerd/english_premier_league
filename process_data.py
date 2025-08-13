@@ -1,5 +1,6 @@
 import json
-
+from dotenv import load_dotenv
+load_dotenv()
 def parse_market_runners(market):
     """
     Parses the runners (betting options) from a market object and extracts

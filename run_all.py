@@ -3,7 +3,8 @@ import multiprocessing
 import uvicorn
 import time
 import sys
-
+from dotenv import load_dotenv
+load_dotenv()
 # --- Configuration ---
 # List of scripts to run sequentially before starting the APIs.
 SEQUENTIAL_SCRIPTS = [

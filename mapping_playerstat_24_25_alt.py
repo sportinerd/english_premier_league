@@ -4,7 +4,8 @@ import re
 from pymongo import UpdateOne
 from thefuzz import fuzz  # Import the fuzzy matching library
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # --- MongoDB Connection Details ---
 DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 DB_NAME = "English_premier_league"

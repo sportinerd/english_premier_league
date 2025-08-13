@@ -3,7 +3,8 @@ import pymongo
 from pymongo import UpdateOne
 from bson.objectid import ObjectId
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # --- MongoDB Connection Details ---
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
 INPUT_DB_NAME = "Fantasy_LiveScoring"

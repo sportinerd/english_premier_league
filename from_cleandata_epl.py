@@ -1,7 +1,8 @@
 import pymongo
 from pymongo.errors import ConnectionFailure
 import os
-
+from dotenv import load_dotenv
+load_dotenv()
 # --- MongoDB Connection Settings ---
 # The source database and collection
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")

@@ -6,7 +6,8 @@ import re
 from datetime import datetime as datetime_cls
 from pymongo import MongoClient
 from typing import List, Dict, Any, Optional, Tuple
-
+from dotenv import load_dotenv
+load_dotenv()
 # ==============================================================================
 # 1. CONFIGURATION
 # ==============================================================================
