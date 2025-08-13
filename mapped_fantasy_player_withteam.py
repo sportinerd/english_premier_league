@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 # --- MongoDB Connection Details ---
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
-INPUT_DB_NAME = "English_premier_league"
+INPUT_DB_NAME = "Fantasy_LiveScoring"
+OUTPUT_DB_NAME = "English_premier_league" 
 OUTPUT_COLLECTION_NAME = "mapped_fantasy_player"  # The name for the new collection
 
 def create_or_update_mapped_collection():
@@ -21,6 +22,7 @@ def create_or_update_mapped_collection():
         print(f"Connecting to MongoDB at {INPUT_DB_URI}...")
         client = pymongo.MongoClient(INPUT_DB_URI)
         db = client[INPUT_DB_NAME]
+        output_db = client[OUTPUT_DB_NAME]
 
         # 2. Get collections
         # Note: Using the collection names from your files, not the filenames themselves
@@ -28,7 +30,8 @@ def create_or_update_mapped_collection():
         teams_collection = db["teams"]
         teamofseasons_collection = db["teamofseasons"]
 
-        output_collection = db[OUTPUT_COLLECTION_NAME]
+        
+        output_collection = output_db[OUTPUT_COLLECTION_NAME]
 
         print("Successfully connected to MongoDB.")
 
