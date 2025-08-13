@@ -4,6 +4,7 @@ from datetime import datetime
 from pymongo import MongoClient
 from fastapi import FastAPI, HTTPException
 import uvicorn
+import os
 
 # ==============================================================================
 # 1. CONFIGURATION SETTINGS

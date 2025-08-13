@@ -8,6 +8,7 @@ from scipy.stats import poisson
 from typing import List, Dict, Any, Optional, Tuple
 from bson import ObjectId
 import math
+import os
 
 # ==============================================================================
 # 1. CONFIGURATION

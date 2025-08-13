@@ -3,6 +3,7 @@ import unicodedata
 import re
 from pymongo import UpdateOne
 from thefuzz import fuzz  # Import the fuzzy matching library
+import os
 
 # --- MongoDB Connection Details ---
 DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")

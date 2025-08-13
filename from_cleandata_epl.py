@@ -1,5 +1,6 @@
 import pymongo
 from pymongo.errors import ConnectionFailure
+import os
 
 # --- MongoDB Connection Settings ---
 # The source database and collection

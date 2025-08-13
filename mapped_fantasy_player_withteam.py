@@ -2,6 +2,7 @@
 import pymongo
 from pymongo import UpdateOne
 from bson.objectid import ObjectId
+import os
 
 # --- MongoDB Connection Details ---
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
