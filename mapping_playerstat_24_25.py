@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Tuple
 from fuzzywuzzy import fuzz
 from pymongo import MongoClient
 from bson import ObjectId
+from dotenv import load_dotenv
 load_dotenv()
 # --- MongoDB Connection Details ---
 INPUT_DB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
