@@ -107,6 +107,7 @@ def run_from_cleandata_epl():
 # ============================================================================
 # PART 2: COMBINED API FUNCTIONALITY
 # ============================================================================
+
 # Context manager for MongoDB connections
 @contextmanager
 def get_mongo_connection():
@@ -157,12 +158,10 @@ def load_data_from_mongo(collection_name: str, db_name: str = DB_NAME, is_single
             collection = client[db_name][collection_name]
             # When fetching all documents for a collection that might be a single document, handle appropriately
             if collection_name == "epl" and is_single_doc:
-                 data = collection.find_one()
+                data = collection.find_one()
             else:
                 data = list(collection.find({}))
-                if is_single_doc and data:
-                    data = data[0]
-
+            
             if not data:
                 logger.warning(f"No data found in '{collection_name}'")
                 raise HTTPException(status_code=404, detail=f"No data found in '{collection_name}'.")
@@ -174,7 +173,6 @@ def load_data_from_mongo(collection_name: str, db_name: str = DB_NAME, is_single
     except Exception as e:
         logger.error(f"Unexpected error loading data from MongoDB: {e}")
         raise HTTPException(status_code=500, detail=f"MongoDB Error for {collection_name}: {e}")
-
 
 def parse_match_name(match_name: str, team_map: Dict) -> Tuple[str, str]:
     """Parse match name into home and away teams using mapping"""
@@ -188,12 +186,12 @@ def parse_match_name(match_name: str, team_map: Dict) -> Tuple[str, str]:
 # ----------------------------------------------------------------------------
 # FDR API Functions (MODIFIED)
 # ----------------------------------------------------------------------------
+
 # --- Constants for FDR Calculation ---
 FINAL_FDR_WEIGHTS = {
     'outright': 0.40,
     'correct_score': 0.60
 }
-
 # --- Constants for xG and AFD/DFD Calculations ---
 TOTAL_XG_FOR_MATCH_FROM_STRENGTHS = 2.7
 HOME_ADVANTAGE_XG_MULTIPLIER = 1.15
@@ -235,7 +233,6 @@ def generate_team_details(team_list: List[str]) -> Dict[str, Dict]:
 def map_fixtures_and_odds(epl_data: Dict, sportsmonk_fixtures: List[Dict], team_map: Dict) -> List[Dict]:
     """
     Iterates through all SportsMonk fixtures and attaches odds from EPL data if a match is found.
-    (This function contains the fix)
     """
     # Create a fast lookup for odds
     odds_lookup = {}
@@ -268,14 +265,11 @@ def map_fixtures_and_odds(epl_data: Dict, sportsmonk_fixtures: List[Dict], team_
             if st_obj is None:
                 logger.warning(f"Could not determine datetime format for fixture: {fix.get('fixture_id')}")
                 continue
-
             if st_obj.tzinfo is None:
                 st_obj = st_obj.replace(tzinfo=timezone.utc)
-
         except (ValueError, TypeError) as e:
             logger.warning(f"Error parsing start time for fixture {fix.get('fixture_id')}: {e}")
             continue
-
         date_key = st_obj.strftime('%Y-%m-%d')
         
         # Find matching odds
@@ -289,7 +283,6 @@ def map_fixtures_and_odds(epl_data: Dict, sportsmonk_fixtures: List[Dict], team_
             'gameweek': fix.get('GW'),
             'correct_score_odds': matching_odds.get('markets', {}).get('Correct Score') if matching_odds else None
         })
-    
     logger.info(f"API: ✅ Processed {len(mapped_fixtures)} fixtures from SportsMonk, mapping odds where available.")
     return mapped_fixtures
 
@@ -383,14 +376,12 @@ def fdr_process_all_epl_data() -> List[Dict]:
 
     all_teams = get_all_teams_from_data(s_fixtures)
     team_details = generate_team_details(all_teams)
-
     df_outright = extract_outright_odds_from_data(epl_odds_data, EPL_TEAM_NAME_MAPPING)
     strengths = normalize_tournament_implied_probs(df_outright, all_teams)
     top_4_teams = get_top_n_teams(strengths, NUM_TOP_TEAMS)
     logger.info(f"API: Identified Top {NUM_TOP_TEAMS} teams: {top_4_teams}")
 
     base_fixtures = map_fixtures_and_odds(epl_odds_data, s_fixtures, EPL_TEAM_NAME_MAPPING)
-
     results = []
     logger.info("API: --- Calculating metrics for each fixture ---")
     for fix in base_fixtures:
@@ -442,7 +433,6 @@ def fdr_process_all_epl_data() -> List[Dict]:
 # ----------------------------------------------------------------------------
 # Player Predictions API Functions
 # ----------------------------------------------------------------------------
-
 def aga_process_epl_predictions():
     """
     Process EPL player predictions with updated logic to include opponent IDs.
@@ -455,13 +445,16 @@ def aga_process_epl_predictions():
         teams_data = load_data_from_mongo(TEAMS_COLLECTION, db_name=FANTASY_DB_NAME, is_single_doc=False)
     except HTTPException:
         raise
+    
     # Create a mapping from team _id to api_team_id for easy lookup
     team_id_to_api_id_map = {team['_id']: team.get('api_team_id') for team in teams_data}
+    
     # Prepare player stats
     df = pd.DataFrame(player_stats_raw)
     df['team_canonical'] = df['team'].apply(lambda x: EPL_TEAM_NAME_MAPPING.get(x, x))
     for col in ['goals_scored', 'assists', 'clean_sheets']:
         df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+    
     team_season_stats = {}
     for team_name, group in df.groupby('team_canonical'):
         def_players = group[group['position'].isin(["Goalkeeper", "Defender", "DEF"])]
@@ -473,8 +466,10 @@ def aga_process_epl_predictions():
             "total_clean_sheets": total_cs,
             "avg_cs_per_def_player": (total_cs / num_def_players) if num_def_players > 0 else 0
         }
+    
     players_by_team = {team: group for team, group in df.groupby('team_canonical')}
     all_player_teams = set(df['team_canonical'].unique())
+    
     # Map fixtures and odds
     sportsmonk_lookup = {}
     all_fixture_teams = set()
@@ -502,6 +497,7 @@ def aga_process_epl_predictions():
         except (ValueError, TypeError) as e:
             logger.warning(f"Error parsing fixture start time: {e}")
             continue
+
     mapped_fixtures = []
     for odds_details in epl_odds_data.get('matches', {}).values():
         h_odds, a_odds = parse_match_name(odds_details.get('match_name', ''), EPL_TEAM_NAME_MAPPING)
@@ -527,6 +523,7 @@ def aga_process_epl_predictions():
                 'gameweek': sm_fixture.get('GW'),
                 'odds_details': odds_details,
             })
+
     # Generate team details
     all_known_teams = list(all_fixture_teams | all_player_teams)
     team_details_lookup = {}
@@ -539,6 +536,7 @@ def aga_process_epl_predictions():
             "api_id": 2000 + i,
             "image": f"https://fantasyfootball.sgp1.cdn.digitaloceanspaces.com/epl-logos/{team_name.replace(' ', '-')}.png"
         }
+
     # Process each fixture
     all_match_predictions = []
     for fixture in mapped_fixtures:
@@ -546,11 +544,13 @@ def aga_process_epl_predictions():
         logger.info(f"Processing: {home_team} vs {away_team}")
         home_details = team_details_lookup.get(home_team, {})
         away_details = team_details_lookup.get(away_team, {})
+        
         # Get team IDs and look up their API IDs
         home_team_id = fixture.get('home_team_id')
         away_team_id = fixture.get('away_team_id')
         home_team_api_id = team_id_to_api_id_map.get(home_team_id)
         away_team_api_id = team_id_to_api_id_map.get(away_team_id)
+
         # Estimate team xG and CS probabilities
         cs_odds = fixture['odds_details'].get('markets', {}).get('Correct Score')
         h_xg, a_xg, h_cs_prob, a_cs_prob = 1.35, 1.35, 30.0, 30.0 # Default values
@@ -567,7 +567,6 @@ def aga_process_epl_predictions():
                         total_inv += inv
                     except (ValueError, TypeError):
                         continue
-
             if total_inv > 0:
                 h_xg_calc, a_xg_calc, h_cs_prob_calc, a_cs_prob_calc = 0.0, 0.0, 0.0, 0.0
                 for item in items:
@@ -578,6 +577,7 @@ def aga_process_epl_predictions():
                     if item['h'] == 0: a_cs_prob_calc += norm_p
                 h_xg, a_xg, h_cs_prob, a_cs_prob = h_xg_calc, a_xg_calc, h_cs_prob_calc * 100, a_cs_prob_calc * 100
                 xg_source = "cs_odds"
+
         # Create match output
         match_output = {
             "fixture_id": fixture.get('fixture_id'),
@@ -598,6 +598,7 @@ def aga_process_epl_predictions():
             "xg_source": xg_source,
             "players": []
         }
+
         # Process players for each team
         for team_name, team_xg, opp_xg, team_cs_prob in [
             (home_team, h_xg, a_xg, h_cs_prob),
@@ -613,11 +614,11 @@ def aga_process_epl_predictions():
                 is_home_team = team_name == home_team
                 opponent_id = away_team_id if is_home_team else home_team_id
                 opponent_api_id = away_team_api_id if is_home_team else home_team_api_id
-
+                
                 for _, player_row in team_players_df.iterrows():
                     player_name = player_row.get('name')
                     position = player_row.get('position')
-
+                    
                     # Get direct odds if available
                     match_odds = fixture['odds_details'].get('markets', {})
                     direct_ags_odds = match_odds.get('Anytime Goalscorer', {}).get(player_name)
@@ -625,7 +626,6 @@ def aga_process_epl_predictions():
 
                     # Calculate probabilities
                     ags_prob, aas_prob, ags_prob_source, aas_prob_source = 0.0, 0.0, "no_data", "no_data"
-
                     ags_decimal = convert_american_to_decimal(direct_ags_odds)
                     if ags_decimal:
                         ags_prob = (1 / ags_decimal) * 100
@@ -649,7 +649,7 @@ def aga_process_epl_predictions():
                         if individual_xa > 0:
                             aas_prob = (1 - poisson.pmf(0, individual_xa)) * 100
                             aas_prob_source = "poisson_model"
-
+                    
                     # Calculate clean sheet probability
                     cs_prob, cs_prob_source = 0.0, "not_applicable"
                     if position in ["Goalkeeper", "Defender", "DEF"]:
@@ -663,7 +663,6 @@ def aga_process_epl_predictions():
                             individual_modifier = np.clip(individual_modifier, 0.9, 1.15)
                             base_cs_prob *= individual_modifier
                             cs_prob_source = "hybrid_model"
-
                         xg_adjustment_factor = max(0.5, 1 - (opp_xg / (2.7 * 1.5))) # AVERAGE_TOTAL_GOALS_IN_MATCH
                         calculated_cs_prob = base_cs_prob * xg_adjustment_factor
                         cs_prob = np.clip(calculated_cs_prob, 5.0, 85.0)
@@ -680,208 +679,216 @@ def aga_process_epl_predictions():
                         'opponent_team_id': opponent_id,      # ADDED
                         'opponent_api_id': opponent_api_id   # ADDED
                     })
-
+                    
                     # Remove unnecessary fields
                     for field in ['_id', 'csv__id', '_match', 'team_canonical']:
                         player_data.pop(field, None)
-
                     match_output["players"].append(player_data)
+        
         all_match_predictions.append(match_output)
+    
     logger.info(f"--- SUCCESS: Processed {len(all_match_predictions)} matches. ---")
     return all_match_predictions
+
 # ----------------------------------------------------------------------------
-# Player Points API Functions
+# Player Points API Functions (REPLACED SECTION)
 # ----------------------------------------------------------------------------
 
+# --- Fantasy Points System & Model Constants ---
+FANTASY_POINTS_CONFIG = {
+    'goal': {'Goalkeeper': 10, 'Defender': 6, 'Midfielder': 5, 'Forward': 4},
+    'assist': 3,
+    'clean_sheet': 4,
+    'hat_trick_bonus': 2,
+    'minutes_played_baseline': 2,
+}
+AVERAGE_TOTAL_GOALS_IN_MATCH = 2.7
+DEFENSIVE_POSITIONS = ["Goalkeeper", "Defender"]
+
+def get_position_category(position_str: str) -> str:
+    """Helper to categorize detailed positions into general roles."""
+    if not isinstance(position_str, str): return 'Forward'
+    pos_l = position_str.lower()
+    if 'goalkeeper' in pos_l: return 'Goalkeeper'
+    if 'defender' in pos_l or 'back' in pos_l: return 'Defender'
+    if 'midfield' in pos_l: return 'Midfielder'
+    return 'Forward'
+
+def estimate_team_xg_cs(cs_odds_american: Optional[Dict]) -> Tuple[float, float, float, float]:
+    """Calculate team expected goals and clean sheet probability from correct score odds."""
+    if not cs_odds_american:
+        return AVERAGE_TOTAL_GOALS_IN_MATCH / 2, AVERAGE_TOTAL_GOALS_IN_MATCH / 2, 25.0, 25.0
+    cs_odds = {s: convert_american_to_decimal(o) for s, o in cs_odds_american.items() if convert_american_to_decimal(o)}
+    h_xg, a_xg, h_cs_prob, a_cs_prob, total_inv = 0.0, 0.0, 0.0, 0.0, 0.0
+    items = []
+    for score, odd in cs_odds.items():
+        if odd and odd > 1.0:
+            try:
+                inv = 1.0 / odd
+                h, a = map(int, score.split('-'))
+                items.append({'h': h, 'a': a, 'inv': inv})
+                total_inv += inv
+            except (ValueError, TypeError): continue
+    if total_inv == 0: return AVERAGE_TOTAL_GOALS_IN_MATCH / 2, AVERAGE_TOTAL_GOALS_IN_MATCH / 2, 25.0, 25.0
+    for item in items:
+        norm_p = item['inv'] / total_inv
+        h_xg += item['h'] * norm_p
+        a_xg += item['a'] * norm_p
+        if item['a'] == 0: h_cs_prob += norm_p
+        if item['h'] == 0: a_cs_prob += norm_p
+    return h_xg, a_xg, h_cs_prob * 100, a_cs_prob * 100
+
+def calculate_points_from_contribution(player_data: Dict, team_expected_goals: float, clean_sheet_prob: float) -> Dict:
+    """Fallback model using player's historical contribution ratios."""
+    total_points = FANTASY_POINTS_CONFIG['minutes_played_baseline']
+    position = player_data.get('PositionCategory', 'Forward')
+    goal_points = FANTASY_POINTS_CONFIG['goal'].get(position, FANTASY_POINTS_CONFIG['goal']['Forward'])
+    goal_contribution = player_data.get('goal_contribution_ratio', 0)
+    expected_goals = team_expected_goals * goal_contribution
+    total_points += expected_goals * goal_points
+    assist_contribution = player_data.get('assist_contribution_ratio', 0)
+    expected_assists = team_expected_goals * assist_contribution # Use team_xg for assists too
+    total_points += expected_assists * FANTASY_POINTS_CONFIG['assist']
+    if position in DEFENSIVE_POSITIONS:
+        total_points += clean_sheet_prob * FANTASY_POINTS_CONFIG['clean_sheet']
+    return {
+        'expected_points': round(total_points, 2),
+        'goal_probability': round(1 - np.exp(-expected_goals), 3) if expected_goals > 0 else 0,
+        'assist_probability': round(1 - np.exp(-expected_assists), 3) if expected_assists > 0 else 0,
+        'expected_goals': round(expected_goals, 3),
+        'points_calc_method': "contribution_model"
+    }
+
+def calculate_points_from_direct_odds(player_name: str, position: str, match_markets: Dict, clean_sheet_prob: float) -> Dict:
+    """Primary model using multi-goal and assist odds when available."""
+    ags_odds = match_markets.get("Anytime Goalscorer", {}).get(player_name)
+    score_2_plus_odds = match_markets.get("To Score 2 or More Goals", {}).get(player_name)
+    hat_trick_odds = match_markets.get("To Score a Hat-Trick", {}).get(player_name)
+    assist_odds = match_markets.get("Anytime Assist", {}).get(player_name)
+    prob_1 = 1 / convert_american_to_decimal(ags_odds) if ags_odds and convert_american_to_decimal(ags_odds) else 0
+    prob_2 = 1 / convert_american_to_decimal(score_2_plus_odds) if score_2_plus_odds and convert_american_to_decimal(score_2_plus_odds) else 0
+    prob_3 = 1 / convert_american_to_decimal(hat_trick_odds) if hat_trick_odds and convert_american_to_decimal(hat_trick_odds) else 0
+    prob_a = 1 / convert_american_to_decimal(assist_odds) if assist_odds and convert_american_to_decimal(assist_odds) else 0
+    prob_e1 = prob_1 - prob_2
+    prob_e2 = prob_2 - prob_3
+    exp_pts = FANTASY_POINTS_CONFIG['minutes_played_baseline']
+    goal_pts = FANTASY_POINTS_CONFIG['goal'].get(position, FANTASY_POINTS_CONFIG['goal']['Forward'])
+    exp_pts += prob_e1 * goal_pts
+    exp_pts += prob_e2 * (goal_pts * 2)
+    exp_pts += prob_3 * (goal_pts * 3 + FANTASY_POINTS_CONFIG['hat_trick_bonus'])
+    exp_pts += prob_a * FANTASY_POINTS_CONFIG['assist']
+    if position in DEFENSIVE_POSITIONS:
+        exp_pts += clean_sheet_prob * FANTASY_POINTS_CONFIG['clean_sheet']
+    total_expected_goals = (prob_e1 * 1) + (prob_e2 * 2) + (prob_3 * 3)
+    return {
+        "expected_points": round(exp_pts, 2),
+        "goal_probability": round(prob_1, 3),
+        "assist_probability": round(prob_a, 3),
+        "expected_goals": round(total_expected_goals, 3),
+        "points_calc_method": "advanced_odds_model"
+    }
+
 def pp_process_epl_player_points():
-    """Process EPL player points with enhanced model"""
-    logger.info("API: --- Starting Enhanced EPL Player Points Processing ---")
+    """Process EPL player points with the new hybrid model."""
+    logger.info("API: --- Starting EPL Player Points Processing (Hybrid Model) ---")
     try:
         epl_odds_data = load_data_from_mongo("epl", is_single_doc=True)
         sportsmonk_fixtures = load_data_from_mongo("sportsmonk_fixture", is_single_doc=False)
         player_stats_raw = load_data_from_mongo("player_stat_24_25_mapped", is_single_doc=False)
-        teams_data = load_data_from_mongo(TEAMS_COLLECTION, db_name=FANTASY_DB_NAME, is_single_doc=False) # MODIFIED
+        teams_data = load_data_from_mongo(TEAMS_COLLECTION, db_name=FANTASY_DB_NAME, is_single_doc=False)
     except HTTPException:
         raise
-    # Create a mapping from team _id to api_team_id for easy lookup
-    team_id_to_api_id_map = {team['_id']: team.get('api_team_id') for team in teams_data} # ADDED
+    
+    team_id_to_api_id_map = {team['_id']: team.get('api_team_id') for team in teams_data}
 
-    # Prepare player stats with enhanced metrics
+    # Prepare player stats with contribution ratios
     df = pd.DataFrame(player_stats_raw)
     df['team_canonical'] = df['team'].apply(lambda x: EPL_TEAM_NAME_MAPPING.get(x, x))
-    # Position categorization
-    def get_position_category(position_str: str) -> str:
-        if not isinstance(position_str, str):
-            return 'Forward'
-        pos_l = position_str.lower()
-        if 'goalkeeper' in pos_l:
-            return 'Goalkeeper'
-        if 'defender' in pos_l or 'back' in pos_l:
-            return 'Defender'
-        if 'midfield' in pos_l:
-            return 'Midfielder'
-        return 'Forward'
     df['PositionCategory'] = df['position'].apply(get_position_category)
     for col in ['goals_scored', 'assists', 'clean_sheets']:
         df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
-    # Calculate player quality metrics
-    def calculate_player_quality_metrics(player_stats: Dict, games_played: int = 25) -> Dict:
-        goals = float(player_stats.get('goals_scored', 0))
-        assists = float(player_stats.get('assists', 0))
-        clean_sheets = float(player_stats.get('clean_sheets', 0))
-        estimated_games = max(games_played, 1)
-        goals_per_game = goals / estimated_games
-        assists_per_game = assists / estimated_games
-        combined_per_game = goals_per_game + assists_per_game
-        cs_per_game = clean_sheets / estimated_games
-        # Determine player tier
-        if combined_per_game >= 0.8:
-            tier = "premium"
-            quality_multiplier = 1.4
-        elif combined_per_game >= 0.4:
-            tier = "good"
-            quality_multiplier = 1.2
-        else:
-            tier = "regular"
-            quality_multiplier = 1.0
-        return {
-            'goals_per_game': goals_per_game,
-            'assists_per_game': assists_per_game,
-            'combined_per_game': combined_per_game,
-            'cs_per_game': cs_per_game,
-            'tier': tier,
-            'quality_multiplier': quality_multiplier,
-            'estimated_games': estimated_games
-        }
-    df_with_quality = []
-    for _, row in df.iterrows():
-        player_data = row.to_dict()
-        quality_metrics = calculate_player_quality_metrics(player_data)
-        player_data.update(quality_metrics)
-        df_with_quality.append(player_data)
-    df = pd.DataFrame(df_with_quality)
-    # Team season stats
-    team_season_stats = {}
+    
+    df_with_ratios = []
     for team_name, group in df.groupby('team_canonical'):
-        def_players = group[group['position'].isin(["Goalkeeper", "Defender", "DEF"])]
-        num_def_players = len(def_players)
-        total_cs = def_players['clean_sheets'].sum()
-        team_season_stats[team_name] = {
-            "total_goals": group['goals_scored'].sum(),
-            "total_assists": group['assists'].sum(),
-            "total_clean_sheets": total_cs,
-            "avg_cs_per_def_player": (total_cs / num_def_players) if num_def_players > 0 else 0,
-            "avg_goals_per_game": group['goals_scored'].sum() / 25,
-            "avg_assists_per_game": group['assists'].sum() / 25,
-            "premium_players": len(group[group['tier'] == 'premium']),
-            "team_strength": group['quality_multiplier'].mean()
-        }
+        total_team_goals = group['goals_scored'].sum()
+        total_team_assists = group['assists'].sum()
+        group['goal_contribution_ratio'] = (group['goals_scored'] / total_team_goals) if total_team_goals > 0 else 0
+        group['assist_contribution_ratio'] = (group['assists'] / total_team_assists) if total_team_assists > 0 else 0
+        df_with_ratios.append(group)
+    if df_with_ratios: df = pd.concat(df_with_ratios)
+    
     players_by_team = {team: group for team, group in df.groupby('team_canonical')}
     all_player_teams = set(df['team_canonical'].unique())
-    # Map fixtures and odds
+
+    # Map fixtures using the same robust logic as other endpoints
     sportsmonk_lookup = {}
     all_fixture_teams = set()
     for fixture in sportsmonk_fixtures:
         all_fixture_teams.add(fixture['home_team_name'])
         all_fixture_teams.add(fixture['away_team_name'])
         start_time_val = fixture.get('starting_at')
-        if not start_time_val:
-            continue
-        start_time_obj = None
+        if not start_time_val: continue
         try:
             if isinstance(start_time_val, datetime):
-                start_time_obj = start_time_val.replace(tzinfo=timezone.utc)
-            elif isinstance(start_time_val, str):
-                start_time_obj = datetime.fromisoformat(start_time_val.replace('Z', '+00:00'))
-            elif isinstance(start_time_val, dict) and '$date' in start_time_val:
-                start_time_obj = datetime.fromisoformat(start_time_val['$date'].replace('Z', '+00:00'))
+                start_time_obj = start_time_val
+            else:
+                start_time_obj = datetime.fromisoformat(str(start_time_val).replace('Z', '+00:00'))
 
-            if start_time_obj:
-                fixture['parsed_start_time'] = start_time_obj
-                date_str = start_time_obj.strftime('%Y-%m-%d')
-                sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
-        except (ValueError, TypeError) as e:
-            logger.warning(f"Error parsing fixture start time: {e}")
-            continue
+            if start_time_obj.tzinfo is None:
+                start_time_obj = start_time_obj.replace(tzinfo=timezone.utc)
+            fixture['parsed_start_time'] = start_time_obj
+            date_str = start_time_obj.strftime('%Y-%m-%d')
+            sportsmonk_lookup[(fixture['home_team_name'], fixture['away_team_name'], date_str)] = fixture
+        except (ValueError, TypeError): continue
+
     mapped_fixtures = []
     for odds_details in epl_odds_data.get('matches', {}).values():
         h_odds, a_odds = parse_match_name(odds_details.get('match_name', ''), EPL_TEAM_NAME_MAPPING)
         time_str = odds_details.get('start_time')
-        if h_odds == "Unknown" or not time_str:
-            continue
+        if h_odds == "Unknown" or not time_str: continue
         try:
             date_obj = datetime.fromisoformat(time_str.replace('Z', '+00:00'))
-            date_str = date_obj.strftime('%Y-%m-%d')
-        except ValueError:
-            continue
-        sm_fixture = sportsmonk_lookup.get((h_odds, a_odds, date_str))
-        if sm_fixture:
-            mapped_fixtures.append({
-                'fixture_id': sm_fixture.get('fixture_id'),
-                'home_team_id': sm_fixture.get('home_team_id'),
-                'away_team_id': sm_fixture.get('away_team_id'),
-                'home_team_name': sm_fixture['home_team_name'],
-                'away_team_name': sm_fixture['away_team_name'],
-                'date': date_obj.date(),
-                'starting_at': sm_fixture['parsed_start_time'].isoformat(),
-                'gameweek': sm_fixture.get('GW'),
-                'odds_details': odds_details,
-            })
-    # Generate team details
+            sm_fixture = sportsmonk_lookup.get((h_odds, a_odds, date_obj.strftime('%Y-%m-%d')))
+            if sm_fixture:
+                mapped_fixtures.append({
+                    'fixture_id': sm_fixture.get('fixture_id'),
+                    'home_team_id': sm_fixture.get('home_team_id'),
+                    'away_team_id': sm_fixture.get('away_team_id'),
+                    'home_team_name': sm_fixture['home_team_name'],
+                    'away_team_name': sm_fixture['away_team_name'],
+                    'starting_at': sm_fixture['parsed_start_time'].isoformat(),
+                    'gameweek': sm_fixture.get('GW'),
+                    'odds_details': odds_details,
+                })
+        except ValueError: continue
+
+    # Generate consistent team details
     all_known_teams = list(all_fixture_teams | all_player_teams)
     team_details_lookup = {}
     for i, team_name in enumerate(all_known_teams):
         short_code_parts = [word[0] for word in team_name.split() if word[0].isupper()]
         short_code = "".join(short_code_parts) if short_code_parts else team_name[:3].upper()
         team_details_lookup[team_name] = {
-            "team_id": f"TEAM_{1000 + i}",
-            "short_code": short_code,
-            "api_id": 2000 + i,
-            "image": f"https://fantasyfootball.sgp1.cdn.digitaloceanspaces.com/epl-logos/{team_name.replace(' ', '-')}.png"
+            "image": f"https://fantasyfootball.sgp1.cdn.digitaloceanspaces.com/epl-logos/{team_name.replace(' ', '-')}.png",
+            "short_code": short_code
         }
-    # Process each fixture
+    
+    # Main processing loop
     all_match_predictions = []
     for fixture in mapped_fixtures:
         home_team, away_team = fixture['home_team_name'], fixture['away_team_name']
-        logger.info(f"Processing: {home_team} vs {away_team}")
+        logger.info(f"Processing Points For: {home_team} vs {away_team}")
+        
         home_details = team_details_lookup.get(home_team, {})
         away_details = team_details_lookup.get(away_team, {})
-
-        # Get team IDs and look up their API IDs - MODIFIED
         home_team_id = fixture.get('home_team_id')
         away_team_id = fixture.get('away_team_id')
         home_team_api_id = team_id_to_api_id_map.get(home_team_id)
         away_team_api_id = team_id_to_api_id_map.get(away_team_id)
 
-        # Estimate team xG and CS probabilities
         match_markets = fixture['odds_details'].get('markets', {})
-        cs_odds = match_markets.get('Correct Score')
-        h_xg, a_xg, h_cs_prob, a_cs_prob = 1.35, 1.35, 25.0, 25.0 # Default values
-        if cs_odds:
-            cs_odds_decimal = {s: convert_american_to_decimal(o) for s, o in cs_odds.items() if convert_american_to_decimal(o)}
-            h_xg_calc, a_xg_calc, h_cs_prob_calc, a_cs_prob_calc, total_inv = 0.0, 0.0, 0.0, 0.0, 0.0
-            items = []
+        h_xg, a_xg, home_cs_prob, away_cs_prob = estimate_team_xg_cs(match_markets.get('Correct Score'))
 
-            for score, odd in cs_odds_decimal.items():
-                try:
-                    inv = 1.0 / odd
-                    h, a = map(int, score.split('-'))
-                    items.append({'h': h, 'a': a, 'inv': inv})
-                    total_inv += inv
-                except (ValueError, TypeError):
-                    continue
-
-            if total_inv > 0:
-                for item in items:
-                    norm_p = item['inv'] / total_inv
-                    h_xg_calc += item['h'] * norm_p
-                    a_xg_calc += item['a'] * norm_p
-                    if item['a'] == 0:
-                        h_cs_prob_calc += norm_p
-                    if item['h'] == 0:
-                        a_cs_prob_calc += norm_p
-                h_xg, a_xg, h_cs_prob, a_cs_prob = h_xg_calc, a_xg_calc, h_cs_prob_calc * 100, a_cs_prob_calc * 100
-        # Create match output - MODIFIED
         match_output = {
             "fixture_id": fixture.get('fixture_id'),
             "gameweek": fixture.get('gameweek'),
@@ -898,20 +905,17 @@ def pp_process_epl_player_points():
             "away_team_logo": away_details.get('image'),
             "home_expected_goals": round(h_xg, 2),
             "away_expected_goals": round(a_xg, 2),
-            "home_cs_probability": round(h_cs_prob, 1),
-            "away_cs_probability": round(a_cs_prob, 1),
+            "home_cs_probability": round(home_cs_prob, 1),
+            "away_cs_probability": round(away_cs_prob, 1),
             "players": []
         }
-        # Process players for each team
+        
         for team_name, is_home in [(home_team, True), (away_team, False)]:
             if team_name in players_by_team:
                 team_players_df = players_by_team[team_name]
-                team_stats = team_season_stats.get(team_name, {})
                 team_xg = h_xg if is_home else a_xg
-                opponent_xg = a_xg if is_home else h_xg
-                cs_prob = (h_cs_prob if is_home else a_cs_prob) / 100
-
-                # Determine opponent IDs - MODIFIED
+                cs_prob_percent = home_cs_prob if is_home else away_cs_prob
+                
                 opponent_id = away_team_id if is_home else home_team_id
                 opponent_api_id = away_team_api_id if is_home else home_team_api_id
 
@@ -919,122 +923,37 @@ def pp_process_epl_player_points():
                     player_dict = player_row.to_dict()
                     player_name = player_row['name']
                     position = player_row['PositionCategory']
-                    points_data = {}
-
-                    # Try direct odds first
+                    
                     if "Anytime Goalscorer" in match_markets and player_name in match_markets["Anytime Goalscorer"]:
-                        ags_odds = match_markets.get("Anytime Goalscorer", {}).get(player_name)
-                        score_2_plus_odds = match_markets.get("To Score 2 or More Goals", {}).get(player_name)
-                        hat_trick_odds = match_markets.get("To Score a Hat-Trick", {}).get(player_name)
-                        assist_odds = match_markets.get("Anytime Assist", {}).get(player_name)
-
-                        prob_1 = 1/convert_american_to_decimal(ags_odds) if ags_odds and convert_american_to_decimal(ags_odds) else 0
-                        prob_2 = min(prob_1, 1/convert_american_to_decimal(score_2_plus_odds)) if score_2_plus_odds and convert_american_to_decimal(score_2_plus_odds) else 0
-                        prob_3 = min(prob_2, 1/convert_american_to_decimal(hat_trick_odds)) if hat_trick_odds and convert_american_to_decimal(hat_trick_odds) else 0
-                        prob_a = 1/convert_american_to_decimal(assist_odds) if assist_odds and convert_american_to_decimal(assist_odds) else 0
-
-                        prob_e1 = prob_1 - prob_2  # Exactly 1 goal
-                        prob_e2 = prob_2 - prob_3  # Exactly 2 goals
-
-                        goal_pts = {'Goalkeeper': 10, 'Defender': 6, 'Midfielder': 5, 'Forward': 4}.get(position, 4)
-
-                        exp_pts = 2.0  # Minutes played
-                        exp_pts += 1.0  # Enhanced baseline for players with odds
-                        exp_pts += prob_e1 * goal_pts
-                        exp_pts += prob_e2 * (goal_pts * 2)
-                        exp_pts += prob_3 * (goal_pts * 3 + 2)  # Hat-trick bonus
-                        exp_pts += prob_a * 3  # Assist points
-
-                        if prob_1 > 0.2: exp_pts += 0.5
-
-                        points_data = {
-                            "expected_points": round(exp_pts, 2),
-                            "points_calc_method": "direct_odds_enhanced",
-                            "goal_probability": round(prob_1, 3),
-                            "assist_probability": round(prob_a, 3)
-                        }
+                        points_data = calculate_points_from_direct_odds(player_name, position, match_markets, cs_prob_percent / 100)
                     else:
-                        # Use enhanced probability model
-                        base_points = 2.0
-                        tier = player_dict.get('tier', 'regular')
-                        if tier == 'premium': base_points += 2.0
-                        elif tier == 'good': base_points += 1.0
-
-                        if position == 'Forward': base_points += 0.5
-                        elif position == 'Midfielder': base_points += 0.3
-
-                        goals_per_game = player_dict.get('goals_per_game', 0)
-                        quality_multiplier = player_dict.get('quality_multiplier', 1.0)
-                        team_avg_goals = team_stats.get('avg_goals_per_game', 1.5)
-
-                        goal_prob = (goals_per_game * (team_xg / team_avg_goals) * quality_multiplier) if team_avg_goals > 0 else (goals_per_game * quality_multiplier)
-                        goal_prob = min(goal_prob, 0.85)
-
-                        assists_per_game = player_dict.get('assists_per_game', 0)
-                        team_avg_assists = team_stats.get('avg_assists_per_game', 1.5)
-
-                        assist_prob = (assists_per_game * (team_xg / team_avg_assists) * quality_multiplier) if team_avg_assists > 0 else (assists_per_game * quality_multiplier)
-                        assist_prob = min(assist_prob, 0.75)
-
-                        total_points = base_points
-                        goal_pts = {'Goalkeeper': 10, 'Defender': 6, 'Midfielder': 5, 'Forward': 4}.get(position, 4)
-
-                        expected_goals = goal_prob + (goal_prob * 0.3) if player_dict.get('tier') == 'premium' else goal_prob
-                        total_points += expected_goals * goal_pts
-
-                        if position == 'Forward' and goal_prob > 0.3:
-                            total_points += (goal_prob * 0.1) * (goal_pts + 2)
-
-                        total_points += assist_prob * 3
-
-                        if position in ['Goalkeeper', 'Defender', 'Midfielder']:
-                            cs_points = {'Goalkeeper': 4, 'Defender': 4, 'Midfielder': 1}.get(position, 0)
-                            total_points += cs_prob * cs_points
-                            if position in ['Goalkeeper', 'Defender']:
-                                total_points -= opponent_xg * 0.5
-
-                        if player_dict.get('tier') in ['premium', 'good']:
-                            total_points += 0.3 * (1.5 if player_dict.get('tier') == 'premium' else 1.2)
-
-                        combined_per_game = player_dict.get('combined_per_game', 0)
-                        if combined_per_game > 0.6:
-                            total_points += min(combined_per_game * 0.5, 1.0)
-
-                        points_data = {
-                            'expected_points': round(total_points, 2),
-                            'goal_probability': round(goal_prob, 3),
-                            'assist_probability': round(assist_prob, 3),
-                            'expected_goals': round(expected_goals, 2),
-                            'points_calc_method': 'enhanced_probability_model'
-                        }
-
-                    # Combine player data with calculated points - MODIFIED
+                        points_data = calculate_points_from_contribution(player_dict, team_xg, cs_prob_percent / 100)
+                    
                     final_player_data = player_dict.copy()
                     final_player_data.update(points_data)
                     final_player_data['opponent_team_id'] = opponent_id
                     final_player_data['opponent_api_id'] = opponent_api_id
 
-                    # Clean up unnecessary fields
-                    for field in ['_id', 'csv__id', '_match', 'team_canonical', 'estimated_games']:
+                    for field in ['_id', 'csv__id', '_match', 'team_canonical']:
                         final_player_data.pop(field, None)
-
+                    
                     match_output["players"].append(final_player_data)
 
-        # Sort players by expected points
         if "players" in match_output:
             match_output["players"].sort(key=lambda x: x.get('expected_points', 0), reverse=True)
-
         all_match_predictions.append(match_output)
-    logger.info(f"--- SUCCESS: Processed {len(all_match_predictions)} matches with enhanced model. ---")
+        
+    logger.info(f"--- SUCCESS: Processed {len(all_match_predictions)} matches with hybrid points model. ---")
     return all_match_predictions
+
+
 # ============================================================================
 # PART 3: CREATE UNIFIED FASTAPI APPLICATION
 # ============================================================================
-
 app = FastAPI(
     title="Unified EPL Analysis API",
     description="Combined API for FDR, Player Predictions, and Player Points",
-    version="1.2.1", # Version bump for bug fix
+    version="1.3.0", # Version bump for new points model
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -1060,7 +979,6 @@ async def global_exception_handler(request, exc):
 # ----------------------------------------------------------------------------
 # FDR Endpoints
 # ----------------------------------------------------------------------------
-
 @app.get("/epl-fdr-results", summary="Get detailed FDR and team strength metrics for all fixtures", response_model=List[Dict[str, Any]])
 async def get_epl_fdr_data():
     """Get detailed FDR and team strength metrics for all fixtures"""
@@ -1104,7 +1022,6 @@ async def get_epl_match_predictions():
 # ----------------------------------------------------------------------------
 # Player Predictions Endpoints
 # ----------------------------------------------------------------------------
-
 @app.get("/epl-player-predictions", summary="Get EPL Player Predictions (AGS, AAS, CS)", response_model=List[Dict[str, Any]])
 async def get_epl_player_predictions():
     """Get EPL Player Predictions (Anytime Goalscorer, Anytime Assist, Clean Sheet) with opponent IDs."""
@@ -1120,10 +1037,9 @@ async def get_epl_player_predictions():
 # ----------------------------------------------------------------------------
 # Player Points Endpoints
 # ----------------------------------------------------------------------------
-
-@app.get("/epl-player-points", summary="Get Enhanced EPL Player Expected Points", response_model=List[Dict[str, Any]])
+@app.get("/epl-player-points", summary="Get Hybrid Model EPL Player Expected Points", response_model=List[Dict[str, Any]])
 async def get_epl_player_points():
-    """Get Enhanced EPL Player Expected Points"""
+    """Get EPL Player Expected Points using a hybrid model (direct odds or contribution-based)."""
     try:
         results = pp_process_epl_player_points()
         return results
@@ -1138,15 +1054,14 @@ async def health_check():
     """Health check endpoint to verify the API is running"""
     return {
         "status": "healthy",
-        "model_version": "1.2.1",
+        "model_version": "1.3.0",
         "features": [
             "fdr_analysis",
             "player_predictions",
-            "enhanced_player_points"
+            "hybrid_player_points"
         ],
         "timestamp": datetime.now().isoformat()
     }
-
 # ============================================================================
 # PART 4: MAIN EXECUTION
 # ============================================================================
@@ -1161,7 +1076,7 @@ if __name__ == "__main__":
     logger.info("=== Starting Unified API Server ===")
     logger.info(f"API will be available at: http://{API_HOST}:{API_PORT}")
     logger.info(f"API Documentation at: http://{API_HOST}:{API_PORT}/docs")
-
+    
     # Start the FastAPI application
     uvicorn.run(
         "__main__:app",
